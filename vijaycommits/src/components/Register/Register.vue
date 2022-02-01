@@ -32,7 +32,7 @@
             <div>
                 <div class="card" style="width: 22rem">
                         <div class="card-body">
-                            <p>Have an account?<a href="#signIn" class="card-link"><b>SignIn</b></a></p>
+                            <p>Have an account?<a href="#/login" class="card-link"><b>SignIn</b></a></p>
                         </div>
                 </div>
             </div>
