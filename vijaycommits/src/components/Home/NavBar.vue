@@ -19,7 +19,7 @@
                 <i class="bi bi-gear"></i></button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><button class="dropdown-item" href="#">DeleteAccount</button></li>
-                    <li><button class="dropdown-item" href="#">LogOut</button></li>
+                    <li><button class="dropdown-item" href="#" v-on:click="getMeLogOut()">LogOut</button></li>
                 </ul>
             </span>
 
@@ -60,6 +60,13 @@ export default{
       return {
         showModal:false
       }
+    },
+    methods:{
+        getMeLogOut()
+        {
+            this.$router.push({name:'Login'})
+            console.log("ayya vachanayya  !!!")
+        }
     }
 }
 </script>

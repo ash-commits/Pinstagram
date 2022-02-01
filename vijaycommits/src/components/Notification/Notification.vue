@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col"><hr></div>
         </div>
-        <p><b>Name of the sender</b> information <b>TimeStamp</b></p>
+        <p><b> {{ Notification.title }}</b> from {{ Notification.id }} <b> ok we are fetching </b> </p>
+        <img :src="Notification.url"  height="200px" width="200px">
         <div class="row">
             <div class="col"><hr></div>
         </div>
@@ -12,6 +13,15 @@
 
 <script>
 export default{
+    props:['Notification'],
     name: 'Notification',
 }
 </script>
+
+<style scoped>
+hr{
+  margin-top: 0px;
+  margin-bottom: 0px;  
+}
+
+</style>
