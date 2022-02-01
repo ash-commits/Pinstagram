@@ -15,13 +15,13 @@
                         <input type="text" class="form-control mb-2" id="inputNumber" aria-describedby="emailHelp" placeholder="Enter mobile Number" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control mb-2" id="fullName" aria-describedby="emailHelp" placeholder="Enter ur FullName" required>
+                        <input type="text" class="form-control mb-2" id="fullName" aria-describedby="emailHelp" placeholder="Enter name (considered As UserName)" required>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control mb-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-info mt-2">Submit</button>
                 </form>
@@ -36,8 +36,28 @@
                         </div>
                 </div>
             </div>
-            <div>
-                
+            <div class="down">
+                <div class="data">
+                    <p><a href="/#" class="link-secondary">META</a></p>
+                </div>
+                <div class="data">
+                    <p><a href="/#" class="link-secondary">About</a></p>
+                </div>
+                <div class="data">
+                    <p><a href="/#" class="link-secondary">Blog</a></p>
+                </div>
+                <div class="data">
+                    <p><a href="/#" class="link-secondary">Help</a></p>
+                </div>
+                <div class="data">
+                    <p><a href="/#" class="link-secondary">API</a></p>
+                </div>
+                <div class="data">
+                    <p><a href="/#" class="link-secondary">GitSource</a></p>
+                </div>
+            </div>
+            <div class="copyRight">
+                <p>&copy 2022 Pnstagram from TeamRaj</p> 
             </div>
         </center>
     </div>
@@ -57,5 +77,23 @@
 }
 .body{
     background-color: whitesmoke;
+}
+.down
+{
+    display: flex;
+}
+.data
+{
+    margin-top: 70px;
+    width: 10000px;
+    font-size: 10px;
+}
+.copyRight
+{
+    color: grey;
+    font-size: 10px;
+}
+.link-secondary{
+    text-decoration: none;
 }
 </style>
