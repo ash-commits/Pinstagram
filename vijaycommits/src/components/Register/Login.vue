@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="body">
         <div class="top">
             <div class="slider">
                 <transition-group name="fade" tag="div">
@@ -18,12 +18,12 @@
                 </div>
                 <form class="insideForm">
                     <div class="form-group">
-                        <input type="email" class="form-control mb-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                        <input type="email" class="form-control mb-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" v-model="email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control mb-3" id="exampleInputPassword1" placeholder="Password" required>
+                        <input type="password" class="form-control mb-3" id="exampleInputPassword1" placeholder="Password" name="password" v-model="password" required>
                     </div>
-                    <button type="submit" class="btn btn-info">Login</button>
+                    <button type="button" class="btn btn-info">Login</button>
                 </form>
                 <div class="row mt-4">
                     <div class="col"><hr></div>
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="copyRight">
-                <p>&copy 2022 Pinstagram from TeamRaj</p> 
+                <p>&copy; 2022 Pinstagram from TeamRaj</p> 
             </div>
     </div>
 </template>
@@ -82,7 +82,9 @@
                 'https://www.instagram.com/static/images/homepage/screenshot5-2x.jpg/5e04169b9308.jpg'
                 ],
                 currentIndex: 0,
-                timer: null
+                timer: null,
+                email: '',
+                password: ''
             }
         },
         mounted: function () {
@@ -97,6 +99,27 @@
             },
             prev: function () {
                 this.currentIndex -= 1
+            },
+            async getMeLogIn(){
+                const body = {
+                    email: this.email,
+                    password: this.password,
+                }  
+                await axios.post('',body).then((res)=>{
+                    if(res.data.status === 201){
+                        swal({
+                            text: "Login is Successful",
+                            icon: 'success'
+                        }),
+                    this.$router.push({name: 'Home'})
+                    }
+                    else{
+                        swal({
+                            text: "Failed To Login",
+                            icon: 'error'
+                        })
+                    }              
+                })
             }
         },
         computed: {
@@ -108,6 +131,9 @@
 </script>
 
 <style scoped>
+.body{
+    background-color: whitesmoke;
+}
 .top
 {
     display: flex;
@@ -122,7 +148,7 @@
 }
 .slider
 {
-    margin-left: 200px;
+    margin-left: 320px;
 }
 .insideForm
 {
@@ -148,5 +174,9 @@
 }
 .link-secondary{
     text-decoration: none;
+}
+.imagedisplay{
+    border: 2px solid black;
+    border-radius: 20px;
 }
 </style>
