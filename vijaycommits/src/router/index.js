@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home/Home.vue'
-import Register from '@/components/Register/Register.vue'
-import Login from '@/components/Register/Login.vue'
+import Register from '@/components/logs/Register.vue'
+import Login from '@/components/logs/Login.vue'
 import CreatePost from '@/components/Home/CreatePost.vue'
+import ProfileHome from '@/components/Profile/ProfileHome.vue'
+import NotificationHome from '@/components/Notification/NotificationHome'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'Home',
       component: Home
     },
@@ -24,9 +26,19 @@ export default new Router({
       component: Register
     },
     {
-      path:'/CreatePost',
+      path:'/create',
       name:'CreatePost',
       component:CreatePost
+    },
+    {
+      path: '/profile',
+      name: 'ProfileHome',
+      component: ProfileHome
+    },
+    {
+      path: '/notification',
+      name: 'NotificationHome',
+      component: NotificationHome
     }
   ]
 })
