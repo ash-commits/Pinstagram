@@ -1,5 +1,15 @@
 <template>
     <div>
-        Home will come here soon, Splash will Also be here
+        <NavBar />
     </div>
 </template>
+
+<script>
+import NavBar from '@/components/Home/NavBar.vue'
+export default{
+    name: 'Home',
+    components: {
+        NavBar
+    }
+}
+</script>
