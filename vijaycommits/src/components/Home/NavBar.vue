@@ -35,7 +35,8 @@
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
                     <form>
                     <input class="input-class" type="file" id="select-file" placeholder="Select from computer"/>
-                    <label for="select-file" style="font-size:12px;font-weight:strong">Select from computer</label>
+                    <label for="select-file" style="font-size:12px;font-weight:strong">Select from computer</label><br><br>
+                    <input type="submit" class="btn btn-info" style="font-size:small;font-weight:bold"/>
                     </form>
                     </div>
                      <br>
@@ -51,7 +52,26 @@
     </div>
 </div>
 </template>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCmgivUB3Cbpc-7EbQY64pWcwz5LeGgqlk",
+    authDomain: "file-upload-e8517.firebaseapp.com",
+    projectId: "file-upload-e8517",
+    storageBucket: "file-upload-e8517.appspot.com",
+    messagingSenderId: "444917684770",
+    appId: "1:444917684770:web:fc096595d56182ad3d487b"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 <script>
 export default{
     name: 'NavBar',

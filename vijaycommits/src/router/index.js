@@ -5,7 +5,7 @@ import Register from '@/components/logs/Register.vue'
 import Login from '@/components/logs/Login.vue'
 import ProfileHome from '@/components/Profile/ProfileHome.vue'
 import NotificationHome from '@/components/Notification/NotificationHome'
-import EditProfile from '@/components/Profile/EditProfile'
+import ViewStory from '@/components/Stories/ViewStory.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -25,12 +25,7 @@ export default new Router({
       name: 'Register',
       component: Register
     },
-    // {
-    //   path:'/create',
-    //   name:'CreatePost',
-    //   component:CreatePost
-    // },
-        {
+    {
       path: '/profile',
       name: 'ProfileHome',
       component: ProfileHome
@@ -41,9 +36,9 @@ export default new Router({
       component: NotificationHome
     },
     {
-      path: '/edit',
-      name: 'EditProfile',
-      component: EditProfile
-    }
+      path: '/view',
+      name: 'ViewStory',
+      component: ViewStory
+    },
   ]
 })
