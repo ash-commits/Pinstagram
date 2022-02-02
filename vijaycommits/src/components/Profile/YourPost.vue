@@ -1,5 +1,5 @@
 <template>
-    <div class="Post">
+    <div>
              <YourPostCard v-for='post in posts' :key="post.id" v-bind:post="post"/>
         </div>
 </template>

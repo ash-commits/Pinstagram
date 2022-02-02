@@ -1,17 +1,26 @@
 <template>
     <div class="container">
         <div class="container">
+            <div class="top">
+            <div class="proImage"><img :src="feed.url" class="insidePro" height="30px" width="30px"></div>
+            <div class="card-body"><p>UserName</p></div>
+            <div class="setting"><i class="bi bi-three-dots"></i></div>
+            </div>
         <div class="gallery">
     	<div class="gallery-item" tabindex="0">
             <img :src="feed.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="bi bi-heart"></i> 56</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="bi bi-chat" aria-hidden="true"></i> 2</li>
 					</ul>
 				</div>
 		</div>
 		</div>
+        <div class="top">
+                <div><i class="bi bi-heart"></i></div>
+                <div class="commentHeart"><i class="bi bi-chat"></i></div>
+        </div>
 		</div>
     </div>
 </template>
@@ -20,11 +29,38 @@
 export default {
     props:['feed'],
     name: 'FeedCard',
+
 }
 </script>
 
 
 <style scoped>
+.commentHeart{
+    margin-left: 20px;
+}
+.setting{
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.proImage{
+    margin-left: 25px;
+    margin-right: 0px;
+}
+.insidePro{
+    margin-top: 12px;
+}
+.top{
+    display: flex;
+    background-color: white;
+}
+.card-body{
+    text-align: left;
+    margin-bottom: 0px;
+}
+p{
+    margin-bottom: 0px;
+}
 :root {
     font-size: 10px;
 }
@@ -43,14 +79,14 @@ body {
 
 img {
     display: block;
-    border-radius: 20px;
+    border-radius: 40px;
 }
 
 .container {
-    max-width: 50.5rem;
+    max-width: 38.5rem;
     margin: 0 auto;
     padding: 0 2rem;
-    /* position: fixed; */
+    margin-bottom: 20px;
 }
 
 .btn {
@@ -101,6 +137,7 @@ img {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 40px;
 }
 
 .gallery-item-info {

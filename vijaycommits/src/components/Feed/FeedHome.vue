@@ -4,17 +4,20 @@
             <center><Feed /></center>
         </div>
         <div class="suggestions">
-            Suggestions
+            <center>Advertisements / EndorseMents</center>
+            <Suggestions />
         </div>
     </div>
 </template>
 
 <script>
 import Feed from '@/components/Feed/Feed.vue'
+import Suggestions from './Suggestions.vue'
 export default {
     name: 'FeedHome',
     components: {
-        Feed
+        Feed,
+        Suggestions
     }
 }
 </script>
@@ -27,10 +30,12 @@ export default {
 }
 .feed{
     margin-right:10px;
-    margin-left: 300px;
+    margin-left: 30px;
     position: relative;
 }
 .suggestions{
-    margin-left: 200px;
+    margin-left: 100px;
+    position: relative;
+    max-width: 600px;
 }
 </style>

@@ -86,6 +86,7 @@ img {
     max-width: 38.5rem;
     margin: 0 auto;
     padding: 0 2rem;
+    margin-bottom: 20px;
 }
 
 .btn {
@@ -136,6 +137,7 @@ img {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 40px;
 }
 
 .gallery-item-info {
