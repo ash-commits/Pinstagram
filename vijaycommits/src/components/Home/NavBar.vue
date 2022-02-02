@@ -11,8 +11,8 @@
   
         <div class="navigation-icons">
             <div class="navigation-link">
-            <a href="#/home"><i class="bi bi-house"></i></a>
-            <a href="#/notification"><i class="bi bi-heart"></i></a>
+            <a href="#/home" class="target"><i class="focus bi bi-house"></i></a>
+            <a href="#/notification" class="target"><i class="bi bi-heart"></i></a>
             <i class="bi bi-bell"></i>
             <span class="dropdown">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,9 +24,8 @@
             </span>
 
             <span class="dropdown">
-                  <!-- <i class="bi bi-box-arrow-up" @click="upload()"></i> -->
-                  <a class="popsUps" href="http://127.0.0.1:5500/index.html" target="_blank"><i class="bi bi-box-arrow-up"></i></a>
-                  <!-- <transition name = "fade" appear>
+                  <button class="popsUps" @click="showModal = true" ><i class="bi bi-box-arrow-up"></i></button>
+                  <transition name = "fade" appear>
                     <div class="modal-overlay" v-if="showModal"></div>
                   </transition>
                   <transition name = "slide" appear>
@@ -34,26 +33,16 @@
                      <div class="modal-header mt-10"><p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new modal</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span></div>
 
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
-                     <div id="uploadapp">
                     <form>
                     <input class="input-class" type="file" id="select-file" placeholder="Select from computer"/>
-<<<<<<< Updated upstream
-                    <label for="select-file" style="font-size:12px;font-weight:strong">Select from computer</label><br><br>
-<<<<<<< Updated upstream
-                    <input type="submit" class="btn btn-info" style="font-size:small;font-weight:bold"/>
-=======
-                    <input type="submit" class="btn btn-primary" style="color: black;" name="Submit"/>
->>>>>>> Stashed changes
-=======
                     <label for="select-file" style="font-size:12px;font-weight:strong">Select from computer</label>
->>>>>>> Stashed changes
                     </form>
-                    </div>
                     </div>
                      <br>
                     </div>
-                  </transition> -->
+                  </transition>
             </span>
+
 
             <a href="#/profile"><i class="bi bi-person"></i></a>
 
@@ -63,34 +52,7 @@
     </div>
 </div>
 </template>
-<<<<<<< Updated upstream
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
-<<<<<<< Updated upstream
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyCmgivUB3Cbpc-7EbQY64pWcwz5LeGgqlk",
-    authDomain: "file-upload-e8517.firebaseapp.com",
-    projectId: "file-upload-e8517",
-    storageBucket: "file-upload-e8517.appspot.com",
-    messagingSenderId: "444917684770",
-    appId: "1:444917684770:web:fc096595d56182ad3d487b"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
 <script>
 export default{
     name: 'NavBar',
@@ -103,11 +65,8 @@ export default{
     methods:{
         getMeLogOut()
         {
-            this.$router.push({name:''})
+            this.$router.push({name:'Login'})
             console.log("ayya vachanayya  !!!")
-        },
-        upload () {
-          window.location.href = 'http://Users/sivaashokkumar/Desktop/index.html'
         }
     }
 }
@@ -119,6 +78,7 @@ export default{
 body {
   background: #fafafa;
 }
+
 
 /* .feed{
     width: 100%;
@@ -236,6 +196,7 @@ body {
 
 .navigation-icons {
   display: flex;
+  fill: black;
 }
 
 .navigation-search-container input:focus {
