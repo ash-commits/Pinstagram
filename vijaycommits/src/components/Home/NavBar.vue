@@ -37,11 +37,15 @@
                      <div id="uploadapp">
                     <form>
                     <input class="input-class" type="file" id="select-file" placeholder="Select from computer"/>
+<<<<<<< Updated upstream
                     <label for="select-file" style="font-size:12px;font-weight:strong">Select from computer</label><br><br>
 <<<<<<< Updated upstream
                     <input type="submit" class="btn btn-info" style="font-size:small;font-weight:bold"/>
 =======
                     <input type="submit" class="btn btn-primary" style="color: black;" name="Submit"/>
+>>>>>>> Stashed changes
+=======
+                    <label for="select-file" style="font-size:12px;font-weight:strong">Select from computer</label>
 >>>>>>> Stashed changes
                     </form>
                     </div>
@@ -59,6 +63,7 @@
     </div>
 </div>
 </template>
+<<<<<<< Updated upstream
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 <<<<<<< Updated upstream
 <script type="module">
@@ -83,6 +88,9 @@
 =======
 
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> Stashed changes
 <script>
 export default{
     name: 'NavBar',
@@ -95,7 +103,7 @@ export default{
     methods:{
         getMeLogOut()
         {
-            this.$router.push({name:'Login'})
+            this.$router.push({name:''})
             console.log("ayya vachanayya  !!!")
         },
         upload () {
