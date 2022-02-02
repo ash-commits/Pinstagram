@@ -1,29 +1,137 @@
-<!-- Button trigger modal -->
 <template>
-<div>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <div>
+        <div class="stayTogether">
+            <div>
+                <p><b>{{ storyLocal.title }}</b> has posted this story</p>
+            </div>
+            <div style="margin-left:50px;margin-bottom:15px">
+                <button class="btn btn-outline-danger" v-on:click="goHome()">X</button>
+            </div>
+        </div>
+        <div class="container">
+        <div class="gallery">
+    	<div class="gallery-item" tabindex="0">
+            <img :src="storyLocal.url" class="gallery-image" alt="">
+				<div class="gallery-item-info">
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+					</ul>
+				</div>
+		</div>
+		</div>
+		</div>
     </div>
-  </div>
-</div>
-</div>
 </template>
+
+<script>
+export default {
+    props:['story'],
+    name: 'ViewStory',
+    data () {
+    return {
+      storyLocal: null,
+    }
+  },
+    mounted () {
+        this.storyLocal = this.story
+        console.log(this.story)
+  },
+  methods: {
+      goHome(){
+          this.$router.push({name:'Home'})
+      }
+  }
+}
+</script>
+
+<style scoped>
+.stayTogether{
+    display: flex;
+    margin-left: 400px;
+}
+
+.container {
+    max-width: 50.5rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    /* position: fixed; */
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+/* Gallery Section */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -1rem -1rem;
+    padding-bottom: 1rem;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1 0 2rem;
+    margin: 0.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gallery-item:hover .gallery-item-info,
+.gallery-item:focus .gallery-item-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item-info {
+    display: none;
+}
+
+.gallery-item-info li {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.gallery-item-likes {
+    margin-right: 2.2rem;
+}
+
+.gallery-item-type {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.fa-clone,
+.fa-comment {
+    transform: rotateY(180deg);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+img{
+    border-radius: 20px;
+}
+.goRight{
+    margin-left: 600px;
+    margin-right: 0px;
+    position: fixed;
+}
+</style>

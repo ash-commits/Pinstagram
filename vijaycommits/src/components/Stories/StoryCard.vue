@@ -5,7 +5,7 @@
             <!-- <div class="status-wrapper"> -->
                 <div class="status-card">
                     <div class="profile-pic">
-                        <img :src="story.url">
+                        <router-link :to ="{name: 'ViewStory', params: {story: story}}"><img :src="story.url"></router-link>
                     </div>
                     <p class="username">UserName </p>
                 </div>
