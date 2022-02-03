@@ -6,6 +6,7 @@ import Login from '@/components/logs/Login.vue'
 import ProfileHome from '@/components/Profile/ProfileHome.vue'
 import NotificationHome from '@/components/Notification/NotificationHome'
 import ViewStory from '@/components/Stories/ViewStory.vue'
+import AnotherProfileHome from '@/components/OthersProfile/AnotherProfileHome.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -36,10 +37,15 @@ export default new Router({
       component: NotificationHome
     },
     {
-      path: '/view/:story',
+      path: '/view/:id',
       name: 'ViewStory',
       component: ViewStory,
       props: true
     },
+    {
+      path: '/another',
+      name: 'AnotherProfileHome',
+      component: AnotherProfileHome
+    }
   ]
 })

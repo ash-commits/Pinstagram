@@ -20,6 +20,7 @@
         <div class="top">
                 <div><i class="bi bi-heart"></i></div>
                 <div class="commentHeart"><i class="bi bi-chat"></i></div>
+                <div><i class="bi bi-send"></i></div>
         </div>
 		</div>
     </div>
@@ -83,7 +84,7 @@ img {
 }
 
 .container {
-    max-width: 38.5rem;
+    max-width: 43.5rem;
     margin: 0 auto;
     padding: 0 2rem;
     margin-bottom: 20px;
