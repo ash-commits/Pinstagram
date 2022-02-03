@@ -1,5 +1,7 @@
 <template>
     <div>
+        <div><button class="leftClass" v-on:click="goToPrev()">Previous Story</button></div>
+        <div><button class="rightClass" v-on:click="goToNext()">Next Story</button></div>
         <div class="stayTogether">
             <div>
                 <p><b>{{ storyLocalId.title }}</b> has posted this story</p>
@@ -32,6 +34,7 @@ export default {
     data () {
     return {
       storyLocalId: null,
+      localId: null
     }
   },
     mounted () {
@@ -43,6 +46,16 @@ export default {
       goHome(){
           this.$router.push({name:'Home'})
       },
+      goToNext()
+      {
+        this.localId = ++(this.id)
+        this.fetchStory(this.localId)
+      },
+      goToPrev()
+      {
+        this.localId = --(this.id)
+        this.fetchStory(this.localId)
+      },
       async fetchStory(id){
             await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`).then((res)=> {this.storyLocalId = res.data}).catch(err=>console.log(err))
         }
@@ -51,6 +64,21 @@ export default {
 </script>
 
 <style scoped>
+.leftClass{
+    float: left;
+    margin-top: 400px;
+    background-color: white;
+    border-color: white;
+    border: none
+}
+.rightClass{
+    float: right;
+    margin-top: 400px;
+    background-color: white;
+    border-color: white;
+    border: none
+    /* margin-bottom: 400px; */
+}
 .stayTogether{
     display: flex;
     margin-left: 400px;
