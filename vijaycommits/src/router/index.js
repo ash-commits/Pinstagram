@@ -4,14 +4,10 @@ import Home from '@/components/Home/Home.vue'
 import Register from '@/components/logs/Register.vue'
 import Login from '@/components/logs/Login.vue'
 import ProfileHome from '@/components/Profile/ProfileHome.vue'
-import FollowerCard from '@/components/profile/FollowerCard'
-import FollowerListCard from '@/components/profile/FollowerListCard'
 import NotificationHome from '@/components/Notification/NotificationHome'
 import ViewStory from '@/components/Stories/ViewStory.vue'
-import Followers from '@/components/Profile/Followers.vue'
-import Following from '@/components/Profile/Following/Following'
-import FollowingCard from '@/components/Profile/Following/FollowingCard'
-import FollowingListCard from '@/components/Profile/Following/FollowingListCard'
+import FollowersHome from '@/components/Profile/Followers/FollowersHome.vue'
+import AnotherProfile from '@/components/OthersProfile/AnotherProfile.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -48,34 +44,15 @@ export default new Router({
       props: true
     },
     {
-      path: '/followercard',
-      name: 'FollowerCard',
-      component: FollowerCard
-    },
-    {
-      path: '/followerlistcard',
-      name: 'FollowerListCard',
-      component: FollowerListCard
-    },
-    {
       path: '/followers',
-      name: 'Followers',
-      component: Followers
+      name: 'FollowersHome',
+      component: FollowersHome
     },
     {
-      path: '/followingcard',
-      name: 'FollowingCard',
-      component: FollowingCard
-    },
-    {
-      path: '/followinglistcard',
-      name: 'FollowingListCard',
-      component: FollowingListCard
-    },
-    {
-      path: '/following',
-      name: 'Following',
-      component: Following
+      path: '/another/:id',
+      name: 'AnotherProfile',
+      component: AnotherProfile,
+      props: true
     }
   ]
 })

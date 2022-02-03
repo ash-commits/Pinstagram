@@ -53,7 +53,8 @@ import NavBar from '@/components/Home/NavBar.vue'
 import YourPost from '@/components/Profile/YourPost.vue'
 import axios from 'axios'
     export default{
-        name: 'anotherprofile',
+        props:['id'],
+        name: 'AnotherProfile',
         components:{
             NavBar,
             YourPost
@@ -61,17 +62,19 @@ import axios from 'axios'
         data() {
         return {
             currentState: false,
-            profileUser: []
+            profileUser: null,
         }
     },
     methods: {
-        async fetchProfile(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos/1').then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
+        async fetchProfile(id){
+            await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
         }
     },
     mounted() {
-        this.fetchProfile()
-    },
+        this.profileUser = this.id
+        this.fetchProfile(this.id)
+        console.log(this.profileUser)    
+        },
     computed: {
         isActive() {
             return this.currentState;
