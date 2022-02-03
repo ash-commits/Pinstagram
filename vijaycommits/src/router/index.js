@@ -42,7 +42,7 @@ export default new Router({
       component: NotificationHome
     },
     {
-      path: '/view/:story',
+      path: '/view/:id',
       name: 'ViewStory',
       component: ViewStory,
       props: true

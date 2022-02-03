@@ -1,6 +1,6 @@
 <template>
     <div>
-             <FollowingCard v-for='followingCard in followingCards' :key="followingCard.id" v-bind:card="followingCard"/>
+             <FollowingCard v-for='card in cards' :key="card.id" v-bind:card="card"/>
     </div>
 </template>
 <script>
@@ -13,16 +13,16 @@ export default{
     },
     data () {
         return {
-            followingCards: []
+            cards: []
         }
     },
     methods: {
-        async fetchFollowingCards(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.followingCards = res.data}).catch(err=>console.log(err))
+        async fetchCards(){
+            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.cards = res.data}).catch(err=>console.log(err))
         }
     },
     mounted() {
-        this.fetchFollowingCards()
+        this.fetchCards()
     }
 }
 </script>

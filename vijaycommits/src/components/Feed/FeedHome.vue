@@ -4,7 +4,7 @@
             <center><Feed /></center>
         </div>
         <div class="suggestions">
-            <center>Advertisements / EndorseMents</center>
+            <center>Advertisements / Endorsements</center>
             <Suggestions />
         </div>
     </div>
@@ -26,16 +26,24 @@ export default {
 .feedTop{
     display: flex;
     margin-top: 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .feed{
-    margin-right:10px;
-    margin-left: 30px;
+    flex: 2;
+    height: 100vh;
+    margin-right:5px;
+    margin-left: 5px;
     position: relative;
+    overflow: scroll;
+    line-height: 30px;
 }
 .suggestions{
-    margin-left: 100px;
-    position: relative;
-    max-width: 600px;
+    /* flex: 3; */
+    height: 100vh;
+    margin-left: 10px;
+    overflow: scroll;
+    /* position: fixed; */
+    max-width: 400px;
+    line-height: 30px;
 }
 </style>

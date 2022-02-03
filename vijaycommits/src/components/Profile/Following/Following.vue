@@ -8,7 +8,7 @@
     </div>
     <div class="row">
             <div class="col"><hr></div>
-            <div class="col-auto">You are Following</div>
+            <div class="col-auto">Your are Following</div>
             <div class="col"><hr></div>
     </div>
     <div>

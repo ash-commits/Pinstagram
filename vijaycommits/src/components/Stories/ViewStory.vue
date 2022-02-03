@@ -2,7 +2,7 @@
     <div>
         <div class="stayTogether">
             <div>
-                <p><b>{{ storyLocal.title }}</b> has posted this story</p>
+                <p><b>{{ storyLocalId.title }}</b> has posted this story</p>
             </div>
             <div style="margin-left:50px;margin-bottom:15px">
                 <button class="btn btn-outline-danger" v-on:click="goHome()">X</button>
@@ -11,7 +11,7 @@
         <div class="container">
         <div class="gallery">
     	<div class="gallery-item" tabindex="0">
-            <img :src="storyLocal.url" class="gallery-image" alt="">
+            <img :src="storyLocalId.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
 						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
@@ -25,23 +25,28 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-    props:['story'],
+    props:['id'],
     name: 'ViewStory',
     data () {
     return {
-      storyLocal: null,
+      storyLocalId: null,
     }
   },
     mounted () {
-        this.storyLocal = this.story
-        console.log(this.story)
+        this.storyLocalId = this.id
+        console.log(this.storyLocalId)
+        this.fetchStory(this.id)
   },
   methods: {
       goHome(){
           this.$router.push({name:'Home'})
-      }
-  }
+      },
+      async fetchStory(id){
+            await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`).then((res)=> {this.storyLocalId = res.data}).catch(err=>console.log(err))
+        }
+    }
 }
 </script>
 

@@ -243,6 +243,7 @@ body {
 .search-field
 {
     margin-right: 2px;
+    width: 350px;
 }
 .dropdown-toggle::after {
         display: none !important;
