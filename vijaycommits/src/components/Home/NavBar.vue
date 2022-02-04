@@ -35,15 +35,16 @@
                      </div>
 
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
-                    <form>
+                    <!-- <form> -->
                     <!-- <input cxlass="input-class" type="file" id="select-file" placeholder="Select from computer"/> -->
-                    <input class="input-class" type="file" @change="previewImage" accept="image/*" placeholder="select from computer"><br>
-                    <div v-if="imageData!=null">
-                            <img class="preview" :src="picture">
-                            <br>
+                    <!-- <input class="input-class" type="file" @change="previewImage" accept="image/*" placeholder="select from computer"><br>
+                    <div v-if="imageData!=null"> -->
+                            <!-- <img class="preview" :src="picture"> -->
+                            <!-- <br>
                           <button @click="onUpload()" style="border:transparent">Upload</button>
                         </div>                    
-                    </form>
+                    </form> -->
+                    
                     </div>
                      <br>
                     </div>
