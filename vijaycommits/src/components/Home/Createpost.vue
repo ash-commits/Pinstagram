@@ -111,7 +111,7 @@ handleFileUpload(event) {
 				console.log(this.user)
 				console.log(this.file)
 console.log("hLLOOO");
-
+var contentTypeLocal
 
 try{
 
