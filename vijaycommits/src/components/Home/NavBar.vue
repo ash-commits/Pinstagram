@@ -387,7 +387,26 @@ body {
 
 /* end header */
 
-
+.mod .mt-10{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 25px;
+}
+.mod .modal-body{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+}
+.options{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+}
+.dropdown-menu .dropdown-item{
+   font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+}
 .modal-header .modal-body .modal-footer{
   left: 0;
   right: 0;
@@ -397,7 +416,6 @@ body {
   align-self: start;
   width: 40%;
 }
-
 .input-class{
   width: 50%;
 }
@@ -450,5 +468,5 @@ label {
   padding: 0 1em;
   text-align: right;
 }
-    
+
 </style>

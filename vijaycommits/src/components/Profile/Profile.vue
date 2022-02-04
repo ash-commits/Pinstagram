@@ -53,14 +53,37 @@ You can only change your name twice within 14 days.</p>
                      <br>
                     </div>
                   </transition>
-				<!-- <button class="btn profile-settings-btn" aria-label="profile settings"><i class="bi bi-gear"></i></button> -->
+                  <button class="btn profile-edit-btn popUps" @click="showModel = true" >Create Organisation</button>
+                <transition name = "fade" appear>
+                    <div class="modal-overlay" v-if="showModel"></div>
+                  </transition>
+                  <transition name = "slide" appear>
+                   <div class="mod" v-if="showModel"> <!-- <div clas="modal" v-if="showModal"> -->
+                     <div class="modal-header mt-100">
+                        <div class="profile-user-settings">
+            	        <center><h1 style="display:inline;">Become an Organiser</h1><button @click="showModel = false" class="btn-close w-1em"  aria-label="close"></button></center>
+			            </div>
+                     </div>
+
+                     <div class="modal-body">
+                         <form action="">
+                             <label>Name</label><input type="text" id="name" required/><br>
+                             <label class="label mt-5 mb-2">Description</label><textarea/><br>
+                             <label class="label">Website</label><input/><br>
+                             <button class="btn btn-primary mt-5" type="button" @click="sendOrg">Create Organisation</button>
+                         </form>
+                    </div>
+                     <br>
+                    </div>
+                  </transition>
 			</div>
 
 			<div class="profile-stats">
 				<ul>
-					<li><span class="profile-stat-count">57</span> posts</li>
+					<li @mousedown="goToListOfPosts()"><span class="profile-stat-count">{{numberOfPost}}</span> posts</li>
 					<li @mousedown="goToListOfFollowers()"><span class="profile-stat-count">{{followerCount}}</span> followers</li>
 					<li @mousedown="goToListOfFollowing()"><span class="profile-stat-count">{{followingCount}}</span> following</li>
+                    <li @mousedown="goToListOfOrganisations()" id="organisation"><span class="profile-stat-count">96</span> Organisation</li>
 				</ul>
 			</div>
 
@@ -81,7 +104,9 @@ import axios from 'axios'
     data () {
       return {
         showModal:false,
+        showModel:false,
         profileUser: [],
+        numberOfPost:null,
         userId: null,
         followerCount: null,
         followingCount: null
@@ -92,18 +117,30 @@ import axios from 'axios'
             await axios.get(`https://jsonplaceholder.typicode.com/photos/${this.userId}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
         },
         async fetchFollowerCount(){
-            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/true`).then((res)=> {this.followerCount=res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/false`).then((res)=> {this.followerCount=res.data}).catch(err=>console.log(err))
             console.log(followerCount)
         },
         async fetchFollowingCount(){
-            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/false`).then((res)=> {this.followingCount=res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/true`).then((res)=> {this.followingCount=res.data}).catch(err=>console.log(err))
             console.log(this.followingCount)
         },
+        async postCount(){
+            await axios.get(`http://10.177.1.207:9000/post/getNumberOfPosts/${this.userId}`).then((res)=> {this.numberOfPost=res.data}).catch(err=>console.log(err))
+            console.log(this.followingCount)
+        },
+        
         goToListOfFollowers () {
             this.$router.push('Followers')
         },
         goToListOfFollowing () {
             this.$router.push('Following')
+        },
+        goToListOfOrganisations () {
+            this.$router.push('Organisation')
+        },
+        goToListOfPosts()
+        {
+            this.$router.push('Profile')
         }
     },
     mounted() {
@@ -111,6 +148,7 @@ import axios from 'axios'
         this.fetchProfile()
         this.fetchFollowerCount()
         this.fetchFollowingCount()
+        this.postCount()
     }
 }
 </script>

@@ -16,6 +16,7 @@ import AnotherProfile from '@/components/OthersProfile/AnotherProfile.vue'
 // import FollowingListCard from '@/components/Profile/Following/FollowingListCard'
 import YourPost from '@/components/Profile/YourPost'
 import Createpost from '@/components/Home/Createpost'
+import OrganisationHome from '@/components/Profile/Organisation/OrganisationHome'
 Vue.use(Router)
 
 export default new Router({
@@ -77,6 +78,11 @@ export default new Router({
       path: '/createpost',
       name: 'Createpost',
       component: Createpost
+    },
+    {
+      path: '/organisation',
+      name: 'OrganisationHome',
+      component: OrganisationHome
     }
   ]
 })
