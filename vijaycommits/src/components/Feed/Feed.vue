@@ -14,15 +14,17 @@ export default {
     data()
     {
       return{
-          feeds:[]
+          feeds:[],
+          userId: ''
       }  
     },
     methods: {
         async fetchFeeds(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.feeds = res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/feed/posts/${this.userId}`).then((res)=> {this.feeds = res.data}).catch(err=>console.log(err))
         }
     },
     mounted() {
+        this.userId = localStorage.getItem('userId')
         this.fetchFeeds()
     }
 }

@@ -31,46 +31,19 @@
                   <transition name = "slide" appear>
                    <div class="mod" v-if="showModal"> 
                      <div class="modal-header mt-10">
-                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new modal</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
+                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new Post</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
                      </div>
 
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
-                    <!-- <form> -->
-                    <!-- <input cxlass="input-class" type="file" id="select-file" placeholder="Select from computer"/> -->
-                    <!-- <input class="input-class" type="file" @change="previewImage" accept="image/*" placeholder="select from computer"><br>
-                    <div v-if="imageData!=null"> -->
-                            <!-- <img class="preview" :src="picture"> -->
-                            <!-- <br>
-                          <button @click="onUpload()" style="border:transparent">Upload</button>
-                        </div>                    
-                    </form> -->
                     <div>
     <select v-model="user.type">
         <option disabled value="">Please select one</option>
-        <!-- <option>Text</option> -->
         <option>Image</option>
         <option>Audio</option>
         <option>Video</option>
     </select>
     <span>Selected: {{ user.type }}</span>
     <hr />
-    <!-- <div >
-      <p>Upload an image to Firebase:</p>
-      <input type="file" @change="previewImage" >
-    </div> -->
-    <!-- <div>
-        <p>video</p>
-        <input type="file" @change="previewVideo" accept="video/*">
-    </div> -->
-    <!-- <div>
-      <p>Progress: {{uploadValue.toFixed()+"%"}}
-      <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
-    </div>
-    <div v-if="imageData!=null">
-        <img class="preview" :src="picture">
-        <br>
-      <button @click="onUpload()">Upload</button>
-    </div> -->
     <input type="file" @change="handleFileUpload($event)" />
   <div v-if="image">
     <img :src="image.src" />
@@ -110,7 +83,10 @@ export default{
         uploadValue: 0,
         url: '',
         file: "",
+        description:"",
+        category: '',
       image: {},
+      type:true,
       user: {
         type: '',
       }
@@ -126,41 +102,7 @@ export default{
       this.uploadValue=0;
       this.picture=null;
       this.imageData = event.target.files[0];
-    },async onUpload(){
-        var metaData = {
-
-contentType: "image/png"
-
-}
-        const storageRef = firebase.storage().ref();
-console.log(storageRef)
-
-const imageRef = storageRef.child(`images/${this.imageData.name}`);
-
-console.log(metaData);
-
-await imageRef.put(this.imageData, metaData);
-
-const downloadUrl = await imageRef.getDownloadURL()
-
-console.log(downloadUrl)
-this.url = this.downloadUrl
-await axios.post('',this.url).then((res)=>{
-                    if(res.data.status === 201){
-                        swal({
-                            text: "image uploaded",
-                            icon: 'success'
-                        }),
-                    this.$router.push({name: 'Home'})
-                    }
-                    else{
-                        swal({
-                            text: "Not uploaded",
-                            icon: 'error'
-                        })
-                    }              
-                })    
-        },
+    },
         handleFileUpload(event) {
       this.file = event.target.files[0];
     },
@@ -175,7 +117,9 @@ await axios.post('',this.url).then((res)=>{
 
         contentTypeLocal = '';
         if( this.user.type === "Image")
+
         {
+            this.type=true
         this.contentTypeLocal= 'image/png'
         }
         else if(this.user.type === "Audio")
@@ -183,7 +127,8 @@ await axios.post('',this.url).then((res)=>{
             this.contentTypeLocal= 'audio/mp3'
         }
         else if(this.user.type === "Video")
-        {
+        {   
+            this.type=false
             this.contentTypeLocal = "video/mp4"
         }
         var metaData = {
@@ -208,12 +153,24 @@ await axios.post('',this.url).then((res)=>{
 
         this.user.sourceUrl = downloadUrl
         console.log(downloadUrl)
-        await axios.post('',this.downloadUrl).then((res)=>{
-                    if(res.data.status === 201){
+
+        const body = {
+
+            userId : localStorage.getItem('userId'),
+            url : downloadUrl,
+            description: this.description,
+            category: "common",
+            postedOn: Math.round(+new Date()/1000),
+            type: this.type
+        }
+
+        await axios.post('http://10.177.1.207:9000/post',body).then((res)=>{
+                    if(res.status === 200){
                         swal({
                             text: "file uploaded",
                             icon: 'success'
                         }),
+                        console.log(res.status)
                     this.$router.push({name: 'Home'})
                     }
                     else{
@@ -234,6 +191,7 @@ await axios.post('',this.url).then((res)=>{
 
         }
       }
+    
     }
 }
 
@@ -492,5 +450,5 @@ label {
   padding: 0 1em;
   text-align: right;
 }
-
+    
 </style>

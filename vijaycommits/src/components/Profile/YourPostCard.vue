@@ -3,11 +3,11 @@
         <div class="container">
             <div class="top">
             <div class="proImage"><img :src="post.url" class="insidePro" height="30px" width="30px"></div>
-            <div class="card-body"><p>UserName</p></div>
+            <div class="card-body"><p>{{post.userId}}</p></div>
             <div class="setting"><i class="bi bi-three-dots"></i></div>
             </div>
         <div class="gallery">
-    	<div class="gallery-item" tabindex="0">
+    	<div class="gallery-item" tabindex="0" v-if="post.type===true">
             <img :src="post.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
@@ -16,24 +16,28 @@
 					</ul>
 				</div>
 		</div>
+        <div class="gallery-item" tabindex="0" v-if="post.type===false">
+                <v-card class="program-train-card">
+                    <video height="300px" width="500px" controls :src="post.url"></video>
+                    <br>
+                    <v-btn>play/stop</v-btn>
+                </v-card>
+		    </div>
 		</div>
         <div class="top">
-                <div><button @click="heartClicked(isVisible)"><i class="bi bi-heart" id = "heart-icon" ></i></button></div>
-                <!-- <div><i class="bi bi-heart" id = "heart-icon" v-on:click="isVisible = !isVisible"></i></div> -->
-                <!-- <div><i class="bi bi-heart-fill red-color" id = "heart-icon" v-on:click="isVisible = !isVisible"></i></div> -->
-                <div v-if="isVisible"></div>
-                <div class="commentHeart"><i class="bi bi-chat" style="border-radius: 5%"></i></div>
+                <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()"></i>
+                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()"></i></div>
+                <div class="commentHeart"><i class="bi bi-chat"></i></div>
         </div>
         <form>
-                    <div class="post-footer">
-                        <div class="emojis">&#128512;</div>
-                        <div><textarea placeholder="Add comment..." aria-required="true" style="resize:none;border: white;height:20px;text-decoration:none;width:200%;margin-left:0%;font-family: -apple-system,BlinkMacSystemFont"></textarea></div>
-                        <!-- <div><button @click="postComment()" style="margin-left:200%;border:white">Post</button></div> -->
-                        <div>
-                        <button @click="postComment()" style="background-color: white;margin-left: 500%;border: white !important;">Post</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="post-footer">
+                <div class="emojis" style="margin-left:0">&#128512;</div>
+                <div><textarea placeholder="Add comment..." aria-required="true" style="resize:none;border: white;height:20px;text-decoration:none;width:80%;margin-left:0%;font-family: -apple-system,BlinkMacSystemFont"></textarea></div>
+                <div>
+                    <button class="btn btn-outline-primary" @click="postComment()" style="margin-left:30%;background-color: white;border: white !important; ">Post</button>
+                </div>
+            </div>
+            </form>
 		</div>
     </div>
 </template>
@@ -42,24 +46,21 @@
 export default {
     props:['post'],
     name: 'YourPostCard',
-    data() {
+    data () {
         return {
-            isVisible: false
+            hasLiked: false,
+            likes: 0
         }
     },
-    methods:{
-        postComment () {
-            window.alert('Comment posted')
-        },
-        heartClicked (isVisible) {
-            if (isVisible){
-            document.getElementById('heart-icon').style.backgroundColor="red";
-            isVisible = !isVisible;
-            }
+    methods: {
+        toggleLike () {
+            this.hasLiked = !this.hasLiked
+            if(this.hasLiked)
+            {this.likes+=1}
             else{
-            document.getElementById('heart-icon').style.backgroundColor="none";
-
+                this.likes-=1
             }
+            console.log(this.likes)
         }
     }
 
@@ -70,11 +71,13 @@ export default {
 <style scoped>
 .post-footer {
     display: flex;
-    /* justify-content: space-between; */
-    margin-top: 3%;
+    margin-top:3%
 }
-.red-color {
-    color:red;
+.like-heart {
+    cursor: pointer;
+}
+.bi-heart-fill {
+    color: red;
 }
 .commentHeart{
     margin-left: 20px;
@@ -95,12 +98,6 @@ export default {
     display: flex;
     background-color: white;
 }
-.bi-heart:hover{
-    background-color: red;
-    /* fill-content:red */
-
-}
-
 .card-body{
     text-align: left;
     margin-bottom: 0px;

@@ -5,7 +5,7 @@
         </div>
         <div class="suggestions">
             <center>Advertisements / Endorsements</center>
-            <Suggestions />
+            <!-- <Suggestions /> -->
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
     name: 'FeedHome',
     components: {
         Feed,
-        Suggestions
+        // Suggestions
     }
 }
 </script>

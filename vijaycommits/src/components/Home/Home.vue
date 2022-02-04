@@ -4,7 +4,7 @@
         <NavBar />
         </div>
         <div class="stopX">
-            <StroyHome />
+            <!-- <StroyHome /> -->
         </div>
         <div class="feedHome">
             <FeedHome />
@@ -21,7 +21,7 @@ export default{
     components: {
         NavBar,
         FeedHome,
-        StroyHome
+        // StroyHome
     }
 }
 </script>

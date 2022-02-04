@@ -3,11 +3,11 @@
         <div class="container">
             <div class="top">
             <div class="proImage"><img :src="feed.url" class="insidePro" height="30px" width="30px"></div>
-            <div class="card-body"><p>UserName</p></div>
+            <div class="card-body"><p>{{feed.userId}}</p></div>
             <div class="setting"><i class="bi bi-three-dots"></i></div>
             </div>
         <div class="gallery">
-    	<div class="gallery-item" tabindex="0">
+    	<div class="gallery-item" tabindex="0" v-if="feed.type===true">
             <img :src="feed.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
@@ -16,26 +16,75 @@
 					</ul>
 				</div>
 		</div>
+        <div class="gallery-item" tabindex="0" v-if="feed.type===false">
+                <v-card class="program-train-card">
+                    <video height="300px" width="500px" controls :src="feed.url"></video>
+                    <br>
+                    <v-btn>play/stop</v-btn>
+                </v-card>
+		    </div>
 		</div>
         <div class="top">
-                <div><i class="bi bi-heart"></i></div>
+                <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()"></i>
+                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()"></i></div>
                 <div class="commentHeart"><i class="bi bi-chat"></i></div>
-                <div><i class="bi bi-send"></i></div>
         </div>
+        <form>
+            <div class="post-footer">
+                <div class="emojis" style="margin-left:0">&#128512;</div>
+                <div><textarea placeholder="Add comment..." aria-required="true"></textarea></div>
+                <div>
+                    <button class=" post btn btn-outline-primary" @click="postComment()">Post</button>
+                </div>
+            </div>
+            </form>
 		</div>
     </div>
 </template>
-
 <script>
 export default {
     props:['feed'],
     name: 'FeedCard',
+    data(){
+        return{
+            hasLiked: false,
+            likes: 0
+        }
+    },
+    methods: {
+        toggleLike () {
+            this.hasLiked = !this.hasLiked
+            if(this.hasLiked)
+            {this.likes+=1}
+            else{
+                this.likes-=1
+            }
+            console.log(this.likes)
+        }
+    }
 
 }
 </script>
 
 
 <style scoped>
+.post{
+    margin-left: 20px;
+}
+textarea{
+    height: 30px;
+    width: 470px;
+}
+.post-footer {
+    display: flex;
+    margin-top:3%
+}
+.like-heart {
+    cursor: pointer;
+}
+.bi-heart-fill {
+    color: red;
+}
 .commentHeart{
     margin-left: 20px;
 }

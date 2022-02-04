@@ -13,12 +13,15 @@ export default{
     },
     data () {
         return {
+            userId:null,
             cards: []
         }
     },
     methods: {
         async fetchCards(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.cards = res.data}).catch(err=>console.log(err))
+            this.userId= localStorage.getItem("userId")
+            await axios.get(`http://10.177.1.207:9000/connection/${this.userId}`).then((res)=> {this.cards = res.data}).catch(err=>console.log(err))
+            console.log(this.cards)
         }
     },
     mounted() {

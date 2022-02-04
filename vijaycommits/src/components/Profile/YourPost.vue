@@ -10,20 +10,22 @@ import axios from 'axios'
 export default {
     name: 'YourPost',
     components: {
-        YourPostCard
+        YourPostCard,
     },
     data()
     {
       return{
-          posts:[]
+          posts:[],
+          userId:null
       }  
     },
     methods: {
         async fetchPosts(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.posts = res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/post/getPostsByUserId/${this.userId}`).then((res)=> {this.posts = res.data}).catch(err=>console.log(err))
         }
     },
     mounted() {
+        this.userId=localStorage.getItem('userId')
         this.fetchPosts()
     }
 }

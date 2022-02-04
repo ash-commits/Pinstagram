@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <input type="password" class="form-control mb-3" id="exampleInputPassword1" placeholder="Password" name="password" v-model="password" required>
                     </div>
-                    <button type="button" class="btn btn-info">Login</button>
+                    <button type="button" class="btn btn-info" v-on:click="getMeLogIn()"> Login </button>
                 </form>
                 <div class="row mt-4">
                     <div class="col"><hr></div>
@@ -65,12 +65,13 @@
                 </div>
             </div>
             <div class="copyRight">
-                <p>&copy; 2022 Pinstagram from TeamRaj</p> 
+                <p>&copy; 2022 Pinstagram from TeamRaj</p>
             </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
     export default{
         name: 'Login',
         data ()
@@ -100,34 +101,39 @@
             prev: function () {
                 this.currentIndex -= 1
             },
+            
             async getMeLogIn(){
                 const body = {
                     email: this.email,
                     password: this.password,
                 }  
-                await axios.post('',body).then((res)=>{
-                    if(res.data.status === 201){
-                        swal({
-                            text: "Login is Successful",
-                            icon: 'success'
-                        }),
-                    this.$router.push({name: 'Home'})
-                    }
-                    else{
-                        swal({
-                            text: "Failed To Login",
-                            icon: 'error'
-                        })
-                    }              
-                })
-            }
-        },
-        computed: {
+                localStorage.setItem('userId',"A")
+
+            //     await axios.post('123',body).then((res)=>{
+            //         if(res.data.status === 201){
+            //             localStorage.setItem('userId',"A")
+            //             swal({
+            //                 text: "Login is Successful",
+            //                 icon: 'success'
+            //             }),
+            //         this.$router.push({name: 'Home'})
+            //         }
+            //         else{
+            //             swal({
+            //                 text: "Failed To Login",
+            //                 icon: 'error'
+            //             })
+            //         }              
+            //     })
+            // }
+        }
+    },
+    computed: {
             currentImg: function () {
             return this.images[Math.abs(this.currentIndex) % this.images.length]
             }
         }
-    }
+}
 </script>
 
 <style scoped>

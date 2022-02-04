@@ -4,10 +4,10 @@
         <div><h4 class="card-details" style="display:inline">Username</h4></div>
         <div><button class="card-details btn btn-primary">Follow</button></div> -->
         <div class="img" style="margin-left:25%">
-            <img :src="card.url" style="display: inline;width: 30px;height: 30px;padding:5px;border-radius:40px">
+            <!-- <img :src="card.url" style="display: inline;width: 30px;height: 30px;padding:5px;border-radius:40px"> -->
         </div>
         <div class="username" style="">
-            <router-link :to ="{name: 'AnotherProfile', params: {id: card.id}}"><h4 class="router">{{card.title}}</h4></router-link>
+            <router-link :to ="{name: 'AnotherProfile', params: {id: card.id}}"><h4 class="router">{{card}}</h4></router-link>
         </div>
         <div class="follow-btn" style="margin-right:25%">
             <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">Follow</button>
