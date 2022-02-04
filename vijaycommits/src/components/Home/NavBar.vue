@@ -30,12 +30,19 @@
                   </transition>
                   <transition name = "slide" appear>
                    <div class="mod" v-if="showModal"> 
-                     <div class="modal-header mt-10"><p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new modal</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span></div>
+                     <div class="modal-header mt-10">
+                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new modal</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
+                     </div>
 
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
                     <form>
-                    <input class="input-class" type="file" id="select-file" placeholder="Select from computer"/>
-                    <label for="select-file" style="font-size:12px;font-weight:strong">Select from computer</label>
+                    <!-- <input cxlass="input-class" type="file" id="select-file" placeholder="Select from computer"/> -->
+                    <input class="input-class" type="file" @change="previewImage" accept="image/*" placeholder="select from computer"><br>
+                    <div v-if="imageData!=null">
+                            <img class="preview" :src="picture">
+                            <br>
+                          <button @click="onUpload()" style="border:transparent">Upload</button>
+                        </div>                    
                     </form>
                     </div>
                      <br>
@@ -54,12 +61,18 @@
 </template>
 
 <script>
+
+import firebase from 'firebase';
+
 export default{
     name: 'NavBar',
     pop: 'popup',
     data () {
       return {
-        showModal:false
+        showModal:false,
+        imageData: null,
+        picture: null,
+        uploadValue: 0
       }
     },
     methods:{
@@ -67,8 +80,32 @@ export default{
         {
             this.$router.push({name:'Login'})
             console.log("ayya vachanayya  !!!")
-        }
+        },
+        previewImage(event) {
+      this.uploadValue=0;
+      this.picture=null;
+      this.imageData = event.target.files[0];
+    },async onUpload(){
+        var metaData = {
+
+contentType: "image/png"
+
+}
+        const storageRef = firebase.storage().ref();
+console.log(storageRef)
+
+const imageRef = storageRef.child(`images/${this.imageData.name}`);
+
+console.log(metaData);
+
+await imageRef.put(this.imageData, metaData);
+
+const downloadUrl = await imageRef.getDownloadURL()
+
+console.log(downloadUrl)
     }
+
+  }
 }
 </script>
 
@@ -324,37 +361,6 @@ label {
   width: 5em;
   padding: 0 1em;
   text-align: right;
-}
-
-/* Hide the file input using
-opacity */
-[type=file] {
-    position: absolute;
-    filter: alpha(opacity=0);
-    opacity: 0;
-}
-input,
-[type=file] + label {
-  border: 1px solid rgb(22, 103, 209);
-  border-radius: 3px;
-  text-align: left;
-  padding: 10px;
-  width: 150px;
-  margin: 0;
-  left: 0;
-  position: relative;
-}
-[type=file] + label {
-  text-align: center;
-  top: 0.5em;
-  /* Decorative */
-  background: rgb(22, 103, 209);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-[type=file] + label:hover {
-  background: rgb(22, 103, 209);
 }
 
 </style>

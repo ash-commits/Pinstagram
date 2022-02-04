@@ -18,9 +18,22 @@
 		</div>
 		</div>
         <div class="top">
-                <div><i class="bi bi-heart"></i></div>
-                <div class="commentHeart"><i class="bi bi-chat"></i></div>
+                <div><button @click="heartClicked(isVisible)"><i class="bi bi-heart" id = "heart-icon" ></i></button></div>
+                <!-- <div><i class="bi bi-heart" id = "heart-icon" v-on:click="isVisible = !isVisible"></i></div> -->
+                <!-- <div><i class="bi bi-heart-fill red-color" id = "heart-icon" v-on:click="isVisible = !isVisible"></i></div> -->
+                <div v-if="isVisible"></div>
+                <div class="commentHeart"><i class="bi bi-chat" style="border-radius: 5%"></i></div>
         </div>
+        <form>
+                    <div class="post-footer">
+                        <div class="emojis">&#128512;</div>
+                        <div><textarea placeholder="Add comment..." aria-required="true" style="resize:none;border: white;height:20px;text-decoration:none;width:200%;margin-left:0%;font-family: -apple-system,BlinkMacSystemFont"></textarea></div>
+                        <!-- <div><button @click="postComment()" style="margin-left:200%;border:white">Post</button></div> -->
+                        <div>
+                        <button @click="postComment()" style="background-color: white;margin-left: 500%;border: white !important;">Post</button>
+                        </div>
+                    </div>
+                </form>
 		</div>
     </div>
 </template>
@@ -29,12 +42,40 @@
 export default {
     props:['post'],
     name: 'YourPostCard',
+    data() {
+        return {
+            isVisible: false
+        }
+    },
+    methods:{
+        postComment () {
+            window.alert('Comment posted')
+        },
+        heartClicked (isVisible) {
+            if (isVisible){
+            document.getElementById('heart-icon').style.backgroundColor="red";
+            isVisible = !isVisible;
+            }
+            else{
+            document.getElementById('heart-icon').style.backgroundColor="none";
+
+            }
+        }
+    }
 
 }
 </script>
 
 
 <style scoped>
+.post-footer {
+    display: flex;
+    /* justify-content: space-between; */
+    margin-top: 3%;
+}
+.red-color {
+    color:red;
+}
 .commentHeart{
     margin-left: 20px;
 }
@@ -54,6 +95,12 @@ export default {
     display: flex;
     background-color: white;
 }
+.bi-heart:hover{
+    background-color: red;
+    /* fill-content:red */
+
+}
+
 .card-body{
     text-align: left;
     margin-bottom: 0px;
