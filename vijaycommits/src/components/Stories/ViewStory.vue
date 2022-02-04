@@ -41,6 +41,7 @@ export default {
         this.storyLocalId = this.id
         console.log(this.storyLocalId)
         this.fetchStory(this.id)
+        this.localId = this.$route.query.localIdKey
   },
   methods: {
       goHome(){
@@ -59,7 +60,14 @@ export default {
       async fetchStory(id){
             await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`).then((res)=> {this.storyLocalId = res.data}).catch(err=>console.log(err))
         }
+    },
+    watch: {
+        '$route' () {
+        this.localId = this.$route.query.localIdKey
+        this.fetchData(this.localId)
+        }
     }
+
 }
 </script>
 

@@ -21,8 +21,13 @@ export default{
 }
 </script>
 <style>
-.router{
+a:-webkit-any-link {
+    color: black;
+    /* cursor: pointer; */
     text-decoration: none;
+}
+a:hover{
+    color: skyblue;
 }
 .img{
     width: 30

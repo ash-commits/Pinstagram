@@ -7,7 +7,7 @@
             <img :src="card.url" style="display: inline;width: 30px;height: 30px;padding:5px;border-radius:40px">
         </div>
         <div class="username" style="">
-            <router-link :to ="{name: 'AnotherProfile', params: {id: card.id}}"><h4>{{card.title}}</h4></router-link>
+            <router-link :to ="{name: 'AnotherProfile', params: {id: card.id}}"><h4 class="router">{{card.title}}</h4></router-link>
         </div>
         <div class="follow-btn" style="margin-right:25%">
             <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">Follow</button>
@@ -21,8 +21,12 @@ export default{
 }
 </script>
 <style>
-.router{
+a {
+    color: black;
     text-decoration: none;
+}
+a:hover{
+    color: skyblue;
 }
 .img{
     width: 30
