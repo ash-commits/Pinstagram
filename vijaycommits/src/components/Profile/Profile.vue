@@ -81,8 +81,8 @@ You can only change your name twice within 14 days.</p>
 			<div class="profile-stats">
 				<ul>
 					<li @mousedown="goToListOfPosts()"><span class="profile-stat-count">{{numberOfPost}}</span> posts</li>
-					<li @mousedown="goToListOfFollowers()"><span class="profile-stat-count">{{followerCount}}</span> followers</li>
-					<li @mousedown="goToListOfFollowing()"><span class="profile-stat-count">{{followingCount}}</span> following</li>
+					<li @mousedown="goToListOfFollowers()"><span class="profile-stat-count">{{connection[1]}}</span> followers</li>
+					<li @mousedown="goToListOfFollowing()"><span class="profile-stat-count">{{connection[0]}}</span> following</li>
                     <li @mousedown="goToListOfOrganisations()" id="organisation"><span class="profile-stat-count">96</span> Organisation</li>
 				</ul>
 			</div>
@@ -109,19 +109,20 @@ import axios from 'axios'
         numberOfPost:null,
         userId: null,
         followerCount: null,
-        followingCount: null
+        followingCount: null,
+        connection:[]
       }
     },
         methods: {
         async fetchProfile(){
             await axios.get(`https://jsonplaceholder.typicode.com/photos/${this.userId}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
         },
-        async fetchFollowerCount(){
-            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/false`).then((res)=> {this.followerCount=res.data}).catch(err=>console.log(err))
-            console.log(followerCount)
-        },
-        async fetchFollowingCount(){
-            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/true`).then((res)=> {this.followingCount=res.data}).catch(err=>console.log(err))
+        // async fetchFollowerCount(){
+        //     await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/false`).then((res)=> {this.followerCount=res.data}).catch(err=>console.log(err))
+        //     console.log(followerCount)
+        // },
+        async getConnectionCount(){
+            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}`).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
             console.log(this.followingCount)
         },
         async postCount(){
@@ -146,8 +147,9 @@ import axios from 'axios'
     mounted() {
         this.userId = localStorage.getItem('userId')
         this.fetchProfile()
-        this.fetchFollowerCount()
-        this.fetchFollowingCount()
+        // this.fetchFollowerCount()
+        // this.fetchFollowingCount()
+        this.getConnectionCount()
         this.postCount()
     }
 }

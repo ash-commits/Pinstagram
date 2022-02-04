@@ -7,21 +7,22 @@
 		<div class="profile">
             
 			<div class="profile-image">
-                <img :src="profileUser.url" alt="" height="250px" width="250px">
+                <!-- <img :src="searchResult.url" alt="" height="250px" width="250px"> -->
 			</div>
 
 			<div class="profile-user-settings">
-            	<h2 class="profile-user-name">{{profileUser.title}}</h2>
-                <div v-if="1 === profileUser.id">
+            	<h2 class="profile-user-name">{{searchResult.name}}</h2>
+            	<h2 class="profile-user-name">{{searchResult.id}}</h2>
+                <div v-if="1 === searchResult.type">
                     <i class="bi bi-check"></i>
                 </div>
 			</div>
 
 			<div class="profile-stats">
 				<ul>
-					<li><span class="profile-stat-count">57</span> posts</li>
-					<li><span class="profile-stat-count">188</span> followers</li>
-					<li><span class="profile-stat-count">96</span> following</li>
+					<li><span class="profile-stat-count">{{numberOfPost}}</span> posts</li>
+					<li><span class="profile-stat-count">{{connection[0]}}</span> followers</li>
+					<li><span class="profile-stat-count">{{connection[1]}}</span> following</li>
 				</ul>
 			</div>
 
@@ -42,7 +43,7 @@
             <div class="col-auto">Their Posts</div>
             <div class="col"><hr></div>
     </div>
-    <div v-if="1 === profileUser.id">
+    <div v-if="1 === searchResult.id">
         <YourPost />
     </div>
 </div>
@@ -53,7 +54,7 @@ import NavBar from '@/components/Home/NavBar.vue'
 import YourPost from '@/components/Profile/YourPost.vue'
 import axios from 'axios'
     export default{
-        props:['id'],
+        props:['searchResult'],
         name: 'AnotherProfile',
         components:{
             NavBar,
@@ -63,16 +64,43 @@ import axios from 'axios'
         return {
             currentState: false,
             profileUser: null,
+            connection:[],
+            numberOfPost:'',
+            userEmail:localStorage.getItem("userId"),
+
         }
     },
     methods: {
         async fetchProfile(id){
-            await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
+            await axios.get(`${id}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
+        },
+        async getConnectionCount(){
+            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.searchResult.id}`).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
+            console.log(this.followingCount)
+        },
+        async postCount(){
+            await axios.get(`http://10.177.1.207:9000/post/getNumberOfPosts/${this.searchResult.id}`).then((res)=> {this.numberOfPost=res.data}).catch(err=>console.log(err))
+            console.log(this.followingCount)
+        },
+        async ConnectTo()
+        {
+            const body = {
+                userEmail:localStorage.getItem("userId"),
+                connectionType:"following",
+                targetEmail:this.searchResult.id   
+            }
+            await axios.post(`http://10.177.1.207:9000/connection/add/`, body).then((res)=> {this.numberOfPost=res.data}).catch(err=>console.log(err))
+
+        },
+        async disconnectTo() {
+            await axios.delete(`http://10.177.1.207:9000/connection/delete/${this.userEmail}/${this.searchResult.id}`)
         }
     },
     mounted() {
         this.profileUser = this.id
-        this.fetchProfile(this.id)
+        // this.fetchProfile(this.id)
+        this.getConnectionCount()
+        this.postCount()
         console.log(this.profileUser)    
         },
     computed: {
@@ -85,8 +113,16 @@ import axios from 'axios'
                 return this.defaultState
             },
             set(newValue) {
+                if(newValue === false)
+                {
+                    this.disconnectTo()
+                }
+                else{
+                    this.ConnectTo()
+                }
                 this.currentState = newValue;
                 console.log(this.currentState)
+                this.ConnectTo()
             }
         }
     }

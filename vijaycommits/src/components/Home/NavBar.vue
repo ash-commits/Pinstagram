@@ -6,7 +6,7 @@
         </div>
   
         <div class="navigation-search-container">
-            <input class="search-field" type="text" placeholder="Search"><button class="searchBtn"><i class="bi bi-search"></i></button>
+            <input class="search-field" type="text" placeholder="Search" name="searching" v-model="searching"><button class="searchBtn" v-on:click="goSearch()"><i class="bi bi-search"></i></button>
         </div>
   
         <div class="navigation-icons">
@@ -77,6 +77,7 @@ export default{
     pop: 'popup',
     data () {
       return {
+          searching:'',
         showModal:false,
         imageData: null,
         picture: null,
@@ -93,6 +94,11 @@ export default{
       }
     },
     methods:{
+        goSearch()
+        {
+            console.log(this.searching)
+            this.$router.push({name:'SearchHome', query: { searchQuery: this.searching}})
+        },
         getMeLogOut()
         {
             this.$router.push({name:'Login'})
@@ -181,14 +187,9 @@ export default{
                     }              
                 })   
         }
-
-
         }
-
         catch(error){
-
         console.log(error)
-
         }
       }
     

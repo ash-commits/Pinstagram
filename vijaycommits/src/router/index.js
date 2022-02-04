@@ -17,6 +17,7 @@ import AnotherProfile from '@/components/OthersProfile/AnotherProfile.vue'
 import YourPost from '@/components/Profile/YourPost'
 import Createpost from '@/components/Home/Createpost'
 import OrganisationHome from '@/components/Profile/Organisation/OrganisationHome'
+import SearchHome from '@/components/Search/SearchHome.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -83,6 +84,11 @@ export default new Router({
       path: '/organisation',
       name: 'OrganisationHome',
       component: OrganisationHome
+    },
+    {
+      path: '/search',
+      name: 'SearchHome',
+      component: SearchHome
     }
   ]
 })

@@ -4,7 +4,7 @@
         <div><button class="rightClass" v-on:click="goToNext()">Next Story</button></div>
         <div class="stayTogether">
             <div>
-                <p><b>{{ storyLocalId.title }}</b> has posted this story</p>
+                <!-- <p><b>{{ storyLocalId.title }}</b> has posted this story</p> -->
             </div>
             <div style="margin-left:50px;margin-bottom:15px">
                 <button class="btn btn-outline-danger" v-on:click="goHome()">X</button>
@@ -12,8 +12,8 @@
         </div>
         <div class="container">
         <div class="gallery">
-    	<div class="gallery-item" tabindex="0">
-            <img :src="storyLocalId.url" class="gallery-image" alt="">
+    	<div class="gallery-item" tabindex="0" v-if="story.type===true">
+            <img :src="story.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
 						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
@@ -21,6 +21,13 @@
 					</ul>
 				</div>
 		</div>
+         <div class="gallery-item" tabindex="0" v-if="story.type===false">
+                <v-card class="program-train-card">
+                    <video height="300px" width="500px" controls :src="story.url"></video>
+                    <br>
+                    <v-btn>play/stop</v-btn>
+                </v-card>
+		    </div>
 		</div>
 		</div>
     </div>
@@ -29,7 +36,7 @@
 <script>
 import axios from 'axios'
 export default {
-    props:['id'],
+    props:['story'],
     name: 'ViewStory',
     data () {
     return {
@@ -38,10 +45,10 @@ export default {
     }
   },
     mounted () {
-        this.storyLocalId = this.id
+        this.storyLocalId = this.story
         console.log(this.storyLocalId)
-        this.fetchStory(this.id)
-        this.localId = this.$route.query.localIdKey
+        // this.fetchStory(this.id)
+        // this.localId = this.$route.query.localIdKey
   },
   methods: {
       goHome(){
@@ -58,7 +65,7 @@ export default {
         this.fetchStory(this.localId)
       },
       async fetchStory(id){
-            await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`).then((res)=> {this.storyLocalId = res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/feed/stories/${id}`).then((res)=> {this.storyLocalId = res.data}).catch(err=>console.log(err))
         }
     },
     watch: {

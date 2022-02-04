@@ -2,7 +2,7 @@
     <section class="main">
         <div class="status-card">
             <div class="profile-pic">
-                <router-link :to ="{name: 'ViewStory', params: {id: story.id}}"><img :src="story.url"></router-link>
+                <router-link :to ="{name: 'ViewStory', params: {story: story}}"><img :src="story.url"></router-link>
             </div>
                 <p class="username">UserName </p>
         </div>
