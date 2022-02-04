@@ -9,6 +9,13 @@ import ViewStory from '@/components/Stories/ViewStory.vue'
 import FollowersHome from '@/components/Profile/Followers/FollowersHome.vue'
 import FollowingHome from '@/components/Profile/Following/FollowingHome.vue'
 import AnotherProfile from '@/components/OthersProfile/AnotherProfile.vue'
+// import FollowerCard from '@/components/profile/FollowerCard'
+// import FollowerListCard from '@/components/profile/FollowerListCard'
+// import ViewStory from '@/components/Stories/ViewStory.vue'
+// import FollowingCard from '@/components/Profile/Following/FollowingCard'
+// import FollowingListCard from '@/components/Profile/Following/FollowingListCard'
+import YourPost from '@/components/Profile/YourPost'
+import Createpost from '@/components/Home/Createpost'
 Vue.use(Router)
 
 export default new Router({
@@ -49,6 +56,7 @@ export default new Router({
       name: 'FollowersHome',
       component: FollowersHome
     },
+    
     {
       path: '/following',
       name: 'FollowingHome',
@@ -58,7 +66,17 @@ export default new Router({
       path: '/another/:id',
       name: 'AnotherProfile',
       component: AnotherProfile,
-      props: true
+      props: true,
+    },
+    {
+      path: '/yourpost',
+      name: 'YourPost',
+      component: YourPost
+    },
+    {
+      path: '/createpost',
+      name: 'Createpost',
+      component: Createpost
     }
   ]
 })

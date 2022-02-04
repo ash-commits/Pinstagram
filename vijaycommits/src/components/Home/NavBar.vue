@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 import firebase from 'firebase';
 
@@ -72,7 +73,8 @@ export default{
         showModal:false,
         imageData: null,
         picture: null,
-        uploadValue: 0
+        uploadValue: 0,
+        url: ''
       }
     },
     methods:{
@@ -103,7 +105,23 @@ await imageRef.put(this.imageData, metaData);
 const downloadUrl = await imageRef.getDownloadURL()
 
 console.log(downloadUrl)
-    }
+this.url = this.downloadUrl
+await axios.post('',this.url).then((res)=>{
+                    if(res.data.status === 201){
+                        swal({
+                            text: "image uploaded",
+                            icon: 'success'
+                        }),
+                    this.$router.push({name: 'Home'})
+                    }
+                    else{
+                        swal({
+                            text: "Not uploaded",
+                            icon: 'error'
+                        })
+                    }              
+                })    
+        }
 
   }
 }
