@@ -1,17 +1,11 @@
 <template>
     <section class="main">
-    <!-- <div class="wrapper"> -->
-        <!-- <div class="left-col"> -->
-            <!-- <div class="status-wrapper"> -->
-                <div class="status-card">
-                    <div class="profile-pic">
-                        <router-link :to ="{name: 'ViewStory', params: {id: story.id}}"><img :src="story.url"></router-link>
-                    </div>
-                    <p class="username">UserName </p>
-                </div>
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
+        <div class="status-card">
+            <div class="profile-pic">
+                <router-link :to ="{name: 'ViewStory', params: {id: story.id}}"><img :src="story.url"></router-link>
+            </div>
+                <p class="username">UserName </p>
+        </div>
 </section>
 </template>
 

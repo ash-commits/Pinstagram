@@ -7,6 +7,7 @@ import ProfileHome from '@/components/Profile/ProfileHome.vue'
 import NotificationHome from '@/components/Notification/NotificationHome'
 import ViewStory from '@/components/Stories/ViewStory.vue'
 import FollowersHome from '@/components/Profile/Followers/FollowersHome.vue'
+import FollowingHome from '@/components/Profile/Following/FollowingHome.vue'
 import AnotherProfile from '@/components/OthersProfile/AnotherProfile.vue'
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/followers',
       name: 'FollowersHome',
       component: FollowersHome
+    },
+    {
+      path: '/following',
+      name: 'FollowingHome',
+      component: FollowingHome
     },
     {
       path: '/another/:id',
