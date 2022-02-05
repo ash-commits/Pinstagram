@@ -97,7 +97,7 @@ export default{
         goSearch()
         {
             console.log(this.searching)
-            this.$router.push({name:'SearchHome', query: { searchQuery: this.searching}})
+            this.$router.push({name:'SearchHome', query: { searchQuery: this.searching}}).catch(()=>{})
         },
         getMeLogOut()
         {

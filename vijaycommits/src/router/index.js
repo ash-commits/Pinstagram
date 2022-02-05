@@ -14,10 +14,11 @@ import AnotherProfile from '@/components/OthersProfile/AnotherProfile.vue'
 // import ViewStory from '@/components/Stories/ViewStory.vue'
 // import FollowingCard from '@/components/Profile/Following/FollowingCard'
 // import FollowingListCard from '@/components/Profile/Following/FollowingListCard'
-import YourPost from '@/components/Profile/YourPost'
+import YourPostCard from '@/components/Profile/YourPostCard'
 import Createpost from '@/components/Home/Createpost'
 import OrganisationHome from '@/components/Profile/Organisation/OrganisationHome'
 import SearchHome from '@/components/Search/SearchHome.vue'
+import CommentListCard from '@/components/Profile/Comment/CommentListCard'
 Vue.use(Router)
 
 export default new Router({
@@ -71,9 +72,9 @@ export default new Router({
       props: true,
     },
     {
-      path: '/yourpost',
-      name: 'YourPost',
-      component: YourPost
+      path: '/yourpostcard',
+      name: 'YourPostCard',
+      component: YourPostCard
     },
     {
       path: '/createpost',
@@ -89,6 +90,11 @@ export default new Router({
       path: '/search',
       name: 'SearchHome',
       component: SearchHome
+    },
+    {
+      path: '/comment',
+      name: 'CommentListCard',
+      component: CommentListCard
     }
   ]
 })

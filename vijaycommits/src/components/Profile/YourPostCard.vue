@@ -29,6 +29,9 @@
                 <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()"></i></div>
                 <div class="commentHeart"><i class="bi bi-chat"></i></div>
         </div>
+        <div class="comments">
+                    <CommentListCard/>
+        </div>
         <form>
             <div class="post-footer">
                 <div class="emojis" style="margin-left:0">&#128512;</div>
@@ -43,9 +46,13 @@
 </template>
 
 <script>
+import CommentListCard from '@/components/Profile/Comment/CommentListCard'
 export default {
     props:['post'],
     name: 'YourPostCard',
+    components: {
+        CommentListCard
+    },
     data () {
         return {
             hasLiked: false,

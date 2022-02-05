@@ -29,6 +29,9 @@
                 <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()"></i></div>
                 <div class="commentHeart"><i class="bi bi-chat"></i></div>
         </div>
+        <div class="comments">
+            <CommentListCard/>
+        </div>
         <form>
             <div class="post-footer">
                 <div class="emojis" style="margin-left:0">&#128512;</div>
@@ -42,27 +45,29 @@
     </div>
 </template>
 <script>
+import CommentListCard from "@/Components/Profile/Comment/CommentListCard.vue"
 export default {
-    props:['feed'],
-    name: 'FeedCard',
-    data(){
-        return{
+    props: ["feed"],
+    name: "FeedCard",
+    data() {
+        return {
             hasLiked: false,
             likes: 0
-        }
+        };
     },
     methods: {
-        toggleLike () {
-            this.hasLiked = !this.hasLiked
-            if(this.hasLiked)
-            {this.likes+=1}
-            else{
-                this.likes-=1
+        toggleLike() {
+            this.hasLiked = !this.hasLiked;
+            if (this.hasLiked) {
+                this.likes += 1;
             }
-            console.log(this.likes)
+            else {
+                this.likes -= 1;
+            }
+            console.log(this.likes);
         }
-    }
-
+    },
+    components: { CommentListCard }
 }
 </script>
 
