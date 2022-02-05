@@ -1,6 +1,6 @@
 <template>
     <div>
-             <OrganisationCard v-for='card in cards' :key="card.id" v-bind:card="card"/>
+             <OrganisationCard v-for='card in orgs' :key="card.id" v-bind:card="card"/>
     </div>
 </template>
 <script>
@@ -13,16 +13,20 @@ export default{
 },
     data () {
         return {
-            cards: []
+            orgs:[]
         }
     },
     methods: {
-        async fetchCards(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.cards = res.data}).catch(err=>console.log(err))
+        // async fetchCards(){
+        //     await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.cards = res.data}).catch(err=>console.log(err))
+        // },
+        async fetchOrgs(){
+            await axios.get(`http://10.177.1.207:9000/organisationAdmin/find/${this.userId}`).then((res)=> {this.orgs=res.data}).catch(err=>console.log(err))
+            console.log(this.orgs)
         }
     },
     mounted() {
-        this.fetchCards()
+        this.fetchOrgs()
     }
 }
 </script>

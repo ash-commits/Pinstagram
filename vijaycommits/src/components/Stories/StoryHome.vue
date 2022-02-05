@@ -27,6 +27,9 @@
     <img :src="image.src" />
     </div>
   	<br>
+      <div  >
+      <input class ="cap" type ="text" name="caption" placeholder = "Add Caption . . .">
+      </div>
 	<button v-on:click="handleSubmit()">Submit</button>
   </div>
                     </div>
@@ -134,7 +137,7 @@ export default {
 
             userId : localStorage.getItem('userId'),
             url : downloadUrl,
-            expiryTime: Math.round(+new Date()/1000),
+            expiryTime: new Date().getTime() + 10 * 60 ,
             type: this.type
         }
 
@@ -174,6 +177,12 @@ export default {
 </script>
 
 <style scoped>
+.cap{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+  margin-bottom: 20px;
+}
 
 .wrapper{
     width: 200%;

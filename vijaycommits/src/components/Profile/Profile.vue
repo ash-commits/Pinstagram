@@ -67,10 +67,10 @@ You can only change your name twice within 14 days.</p>
 
                      <div class="modal-body">
                          <form action="">
-                             <label>Name</label><input type="text" id="name" required/><br>
-                             <label class="label mt-5 mb-2">Description</label><textarea/><br>
-                             <label class="label">Website</label><input/><br>
-                             <button class="btn btn-primary mt-5" type="button" @click="sendOrg">Create Organisation</button>
+                             <label>Name</label><input type="text" name="orName" v-model="orName" required/><br>
+                             <label class="label mt-5 mb-2">Description</label><textarea name="textArea" v-model="textArea"/><br>
+                             <!-- <label class="label">Website</label><input/><br> -->
+                             <button class="btn btn-primary mt-5" type="button" @click="createOrg">Create Organisation</button>
                          </form>
                     </div>
                      <br>
@@ -83,13 +83,20 @@ You can only change your name twice within 14 days.</p>
 					<li @mousedown="goToListOfPosts()"><span class="profile-stat-count">{{numberOfPost}}</span> posts</li>
 					<li @mousedown="goToListOfFollowers()"><span class="profile-stat-count">{{connection[1]}}</span> followers</li>
 					<li @mousedown="goToListOfFollowing()"><span class="profile-stat-count">{{connection[0]}}</span> following</li>
-                    <li @mousedown="goToListOfOrganisations()" id="organisation"><span class="profile-stat-count">96</span> Organisation</li>
-				</ul>
+                    <li @mousedown="this.$router.push({name:'OrganisationListCard'})" id="organisation"><span class="profile-stat-count">96</span> Organisation</li>
+    
+                </ul>
+                <h2>Organisations</h2>
+                <div v-for='card in orgs' :key="card.id" v-bind:card="card">
+                <div>{{card.organisationName}}</div>
+                </div>
+
 			</div>
 
 			<div class="profile-bio">
-				<p><span class="profile-real-name">BIO or ABOUT</span>  Team 3 is working collectively on Pinstagram 🏕️</p>
-			</div>
+				<!-- <p><span class="profile-real-name">BIO or ABOUT</span>  Team 3 is working collectively on Pinstagram 🏕️</p> -->
+                
+            </div>
             <!-- https://jsonplaceholder.typicode.com/photos/1 -->
 
 		</div>
@@ -110,10 +117,25 @@ import axios from 'axios'
         userId: null,
         followerCount: null,
         followingCount: null,
-        connection:[]
+        connection:[],
+        orName:'',
+        textArea:'',
+        orgs:[]
+
       }
     },
         methods: {
+
+        async createOrg(){
+        const body = {
+                name:this.orName,
+                userId:localStorage.getItem("userId"),
+                description:this.textArea
+            }
+            await axios.post(`http://10.177.1.207:9000/organisation/add`,body).then((res)=> {}).catch(err=>console.log(err))
+            this.orgs     
+        },
+
         // async fetchFollowerCount(){
         //     await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/false`).then((res)=> {this.followerCount=res.data}).catch(err=>console.log(err))
         //     console.log(followerCount)
@@ -127,6 +149,11 @@ import axios from 'axios'
             console.log(this.followingCount)
         },
         
+        async fetchOrgs(){
+            await axios.get(`http://10.177.1.207:9000/organisationAdmin/find/${this.userId}`).then((res)=> {this.orgs=res.data}).catch(err=>console.log(err))
+            console.log(this.orgs)
+        },
+
         goToListOfFollowers () {
             this.$router.push('Followers')
         },
@@ -147,6 +174,7 @@ import axios from 'axios'
         // this.fetchFollowingCount()
         this.getConnectionCount()
         this.postCount()
+        this.fetchOrgs()
     }
 }
 </script>

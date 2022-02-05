@@ -18,7 +18,7 @@ import YourPostCard from '@/components/Profile/YourPostCard'
 import Createpost from '@/components/Home/Createpost'
 import OrganisationHome from '@/components/Profile/Organisation/OrganisationHome'
 import SearchHome from '@/components/Search/SearchHome.vue'
-import CommentListCard from '@/components/Profile/Comment/CommentListCard'
+// import CommentListCard from '@/components/Profile/Comment/CommentListCard'
 Vue.use(Router)
 
 export default new Router({
@@ -91,10 +91,10 @@ export default new Router({
       name: 'SearchHome',
       component: SearchHome
     },
-    {
-      path: '/comment',
-      name: 'CommentListCard',
-      component: CommentListCard
-    }
+    // {
+    //   path: '/comment',
+    //   name: 'CommentListCard',
+    //   component: CommentListCard
+    // }
   ]
 })

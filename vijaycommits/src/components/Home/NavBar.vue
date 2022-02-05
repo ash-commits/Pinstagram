@@ -49,6 +49,9 @@
     <img :src="image.src" />
     </div>
   	<br>
+      <div  >
+      <input class ="cap" type ="text" name="description" v-model="description" placeholder = "Add Caption . . .">
+      </div>
 	<button v-on:click="handleSubmit()">Submit</button>
   </div>
                     </div>
@@ -201,6 +204,13 @@ export default{
 
 <style scoped>
 @import url('//fonts.cdnfonts.com/css/billabong');
+.cap{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
 body {
   background: #fafafa;
 }

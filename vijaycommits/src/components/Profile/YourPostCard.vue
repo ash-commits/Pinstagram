@@ -29,24 +29,20 @@
                 <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()"></i></div>
                 <div class="commentHeart"><i class="bi bi-chat"></i></div>
         </div>
-        <div class="comments">
-                    <!-- <CommentListCard/> -->
-        </div>
-        <form>
+        <div class="desc"><b>{{post.userId}}</b>  {{post.description}}</div><br>
             <div class="post-footer">
-                <div class="emojis" style="margin-left:0">&#128512;</div>
+                <div class="emojis" style="margin-left:0;margin-top:5px">&#128512;</div>
                 <div><textarea placeholder="Add comment..." aria-required="true" style="resize:none;border: white;height:20px;text-decoration:none;width:80%;margin-left:0%;font-family: -apple-system,BlinkMacSystemFont"></textarea></div>
                 <div>
                     <button class="btn btn-outline-primary" @click="postComment()" style="margin-left:30%;background-color: white;border: white !important; ">Post</button>
                 </div>
             </div>
-            </form>
 		</div>
     </div>
 </template>
 
 <script>
-import CommentListCard from '@/components/Profile/Comment/CommentListCard'
+// import CommentListCard from '@/components/Profile/Comment/CommentListCard'
 export default {
     props:['post'],
     name: 'YourPostCard',
@@ -76,9 +72,16 @@ export default {
 
 
 <style scoped>
+
+.desc{
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 .post-footer {
     display: flex;
-    margin-top:3%
+    margin-top:10px;
+    margin-left: 0px;
 }
 .like-heart {
     cursor: pointer;
@@ -134,6 +137,7 @@ img {
 }
 
 .container {
+    margin-top: 200px;
     max-width: 38.5rem;
     margin: 0 auto;
     padding: 0 2rem;
