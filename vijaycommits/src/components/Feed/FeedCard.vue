@@ -11,7 +11,7 @@
             <img :src="feed.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="bi bi-heart"></i> 56</li>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="bi bi-heart"></i> {{feed.numberOfLikes}} </li>
 						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="bi bi-chat" aria-hidden="true"></i> 2</li>
 					</ul>
 				</div>
@@ -25,9 +25,11 @@
 		    </div>
 		</div>
         <div class="top">
-                <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()"></i>
-                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()"></i></div>
-                <div class="commentHeart"><i class="bi bi-chat"></i></div>
+                <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()">{{ feed.numberOfLikes }}</i>
+                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()">{{ feed.numberOfLikes+1 }}</i></div>
+                <div class="commentHeart">{{ feed.postedOn }}</div>
+                <div><i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" @click="toggleDisLike()">{{ feed.numberOfLikes }}</i>
+                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" @click="toggleDisLike()">{{ feed.numberOfLikes+1 }}</i></div>
         </div>
         <div class="comments">
             <CommentListCard/>
@@ -47,6 +49,7 @@
 <script>
 import CommentListCard from "@/Components/Profile/Comment/CommentListCard.vue"
 export default {
+<<<<<<< Updated upstream
     props: ["feed"],
     name: "FeedCard",
     data() {
@@ -68,6 +71,39 @@ export default {
         }
     },
     components: { CommentListCard }
+=======
+    props:['feed'],
+    name: 'FeedCard',
+    data(){
+        return{
+            hasDisLiked: false,
+            hasLiked: false,    
+            postLikes : this.feed.numberOfLikes,
+            postDislikes: this.feed.numberOfDisLikes
+        }
+    },
+    methods: {
+        toggleLike () {
+            this.hasLiked = !this.hasLiked
+            if(this.hasLiked)
+            {this.postLikes+=1}
+            else{
+                this.postLikes-=1
+            }
+            console.log(this.postLikes)
+            // this.sendToBack()
+        },
+        toggleDisLike () {
+            this.hasDisLiked = !this.hasDisLiked
+            if(this.hasDisLiked)
+            {this.postDisLikes+=1}
+            else{
+                this.postDisLikes-=1
+            }
+            console.log(this.postDisLikes)
+        }        
+    }
+>>>>>>> Stashed changes
 }
 </script>
 
@@ -89,6 +125,12 @@ textarea{
 }
 .bi-heart-fill {
     color: red;
+}
+.like-hand-thumbs-down {
+    cursor: pointer;
+}
+.bi-hand-thumbs-down-fill {
+    color: black;
 }
 .commentHeart{
     margin-left: 20px;
