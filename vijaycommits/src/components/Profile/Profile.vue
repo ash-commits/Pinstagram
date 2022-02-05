@@ -114,9 +114,6 @@ import axios from 'axios'
       }
     },
         methods: {
-        async fetchProfile(){
-            await axios.get(`https://jsonplaceholder.typicode.com/photos/${this.userId}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
-        },
         // async fetchFollowerCount(){
         //     await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.userId}/false`).then((res)=> {this.followerCount=res.data}).catch(err=>console.log(err))
         //     console.log(followerCount)
@@ -146,7 +143,6 @@ import axios from 'axios'
     },
     mounted() {
         this.userId = localStorage.getItem('userId')
-        this.fetchProfile()
         // this.fetchFollowerCount()
         // this.fetchFollowingCount()
         this.getConnectionCount()

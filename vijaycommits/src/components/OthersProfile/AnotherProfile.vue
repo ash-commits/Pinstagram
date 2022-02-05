@@ -21,8 +21,8 @@
 			<div class="profile-stats">
 				<ul>
 					<li><span class="profile-stat-count">{{numberOfPost}}</span> posts</li>
-					<li><span class="profile-stat-count">{{connection[0]}}</span> followers</li>
-					<li><span class="profile-stat-count">{{connection[1]}}</span> following</li>
+					<li><span class="profile-stat-count">{{connection[1]}}</span> followers</li>
+					<li><span class="profile-stat-count">{{connection[0]}}</span> following</li>
 				</ul>
 			</div>
 
@@ -122,7 +122,6 @@ import axios from 'axios'
                 }
                 this.currentState = newValue;
                 console.log(this.currentState)
-                this.ConnectTo()
             }
         }
     }

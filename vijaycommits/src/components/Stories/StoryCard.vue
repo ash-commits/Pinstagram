@@ -4,7 +4,7 @@
             <div class="profile-pic">
                 <router-link :to ="{name: 'ViewStory', params: {story: story}}"><img :src="story.url"></router-link>
             </div>
-                <p class="username">UserName </p>
+                <p class="username">{{story.userId}} </p>
         </div>
 </section>
 </template>
