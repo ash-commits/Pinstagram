@@ -30,7 +30,7 @@
                 <div class="commentHeart"><i class="bi bi-chat"></i></div>
         </div>
         <div class="comments">
-                    <CommentListCard/>
+                    <!-- <CommentListCard/> -->
         </div>
         <form>
             <div class="post-footer">
@@ -51,7 +51,7 @@ export default {
     props:['post'],
     name: 'YourPostCard',
     components: {
-        CommentListCard
+        // CommentListCard
     },
     data () {
         return {

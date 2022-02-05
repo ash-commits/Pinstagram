@@ -32,7 +32,7 @@
                 <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" @click="toggleDisLike()">{{ feed.numberOfLikes+1 }}</i></div>
         </div>
         <div class="comments">
-            <CommentListCard/>
+            <!-- <CommentListCard/> -->
         </div>
         <form>
             <div class="post-footer">
@@ -49,7 +49,6 @@
 <script>
 import CommentListCard from "@/Components/Profile/Comment/CommentListCard.vue"
 export default {
-<<<<<<< Updated upstream
     props: ["feed"],
     name: "FeedCard",
     data() {
@@ -70,40 +69,7 @@ export default {
             console.log(this.likes);
         }
     },
-    components: { CommentListCard }
-=======
-    props:['feed'],
-    name: 'FeedCard',
-    data(){
-        return{
-            hasDisLiked: false,
-            hasLiked: false,    
-            postLikes : this.feed.numberOfLikes,
-            postDislikes: this.feed.numberOfDisLikes
-        }
-    },
-    methods: {
-        toggleLike () {
-            this.hasLiked = !this.hasLiked
-            if(this.hasLiked)
-            {this.postLikes+=1}
-            else{
-                this.postLikes-=1
-            }
-            console.log(this.postLikes)
-            // this.sendToBack()
-        },
-        toggleDisLike () {
-            this.hasDisLiked = !this.hasDisLiked
-            if(this.hasDisLiked)
-            {this.postDisLikes+=1}
-            else{
-                this.postDisLikes-=1
-            }
-            console.log(this.postDisLikes)
-        }        
-    }
->>>>>>> Stashed changes
+    // components: { CommentListCard }
 }
 </script>
 
