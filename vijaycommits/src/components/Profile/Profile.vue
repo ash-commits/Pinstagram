@@ -83,8 +83,8 @@ You can only change your name twice within 14 days.</p>
 					<li @mousedown="goToListOfPosts()"><span class="profile-stat-count">{{numberOfPost}}</span> posts</li>
 					<li @mousedown="goToListOfFollowers()"><span class="profile-stat-count">{{connection[1]}}</span> followers</li>
 					<li @mousedown="goToListOfFollowing()"><span class="profile-stat-count">{{connection[0]}}</span> following</li>
-                    <li @mousedown="this.$router.push({name:'OrganisationListCard'})" id="organisation"><span class="profile-stat-count">96</span> Organisation</li>
-    
+                    <li @mousedown="goToListOfOrganisations()" id="organisation"><span class="profile-stat-count">96</span> Organisation</li>
+				
                 </ul>
                 <h2>Organisations</h2>
                 <div v-for='card in orgs' :key="card.id" v-bind:card="card">
