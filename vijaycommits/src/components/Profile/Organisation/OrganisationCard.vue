@@ -60,6 +60,7 @@
 </template>
 <script>
 import firebase from 'firebase'
+import axios from 'axios'
 export default{
     name: 'OrganisationCard',
     props: ['org'],
@@ -103,20 +104,20 @@ export default{
 
         {
             this.type=true
-        this.contentTypeLocal= 'image/png'
+        contentTypeLocal= 'image/png'
         }
         else if(this.user.type === "Audio")
         {
-            this.contentTypeLocal= 'audio/mp3'
+            contentTypeLocal= 'audio/mp3'
         }
         else if(this.user.type === "Video")
         {   
             this.type=false
-            this.contentTypeLocal = "video/mp4"
+            contentTypeLocal = "video/mp4"
         }
         var metaData = {
 
-        contentType: contentTypeLocal
+        'contentType': contentTypeLocal
 
         }
 
@@ -137,19 +138,26 @@ export default{
         this.user.sourceUrl = downloadUrl
         console.log(downloadUrl)
         console.log("ksjdnfkjndsfkj")
+        console.log("Testing")
+//         if(downloadUrl === "" || downloadUrl === undefined || downloadUrl === null)
+// {        console.log("NULL SOURCE URL")
+
+
+// }
         // console.log(org.id)
-        const body = {
+        const bodyObj = {
 
-            userId : org.id,
-            url : downloadUrl,
-            description: this.description,
-            category: "common",
-            postedOn: Math.round(+new Date()/1000),
-            type: this.type
+            'userId' : this.org.organisationId,
+            'url' : downloadUrl,
+            'description': this.description,
+            'category': "common",
+            'postedOn': Math.round(+new Date()),
+            'type': this.type
         }
-        console.log(body)
+        console.log(bodyObj)
 
-        await axios.post('http://10.177.1.207:9000/post',body).then((res)=>{
+
+        axios.post('http://10.177.1.207:9000/post',bodyObj).then((res)=>{
                     if(res.status === 200){
                         swal({
                             text: "file uploaded",
@@ -164,10 +172,11 @@ export default{
                             icon: 'error'
                         })
                     }              
-                })   
+                }).catch(err => console.log(err))   
         }
         }
         catch(error){
+            console.log("In catch"+error)
         }
       }
     }

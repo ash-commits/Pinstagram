@@ -86,10 +86,10 @@ You can only change your name twice within 14 days.</p>
                     <li @mousedown="goToListOfOrganisations()" id="organisation"><span class="profile-stat-count">96</span> Organisation</li>
 				
                 </ul>
-                <h2>Organisations</h2>
-                <div v-for='card in orgs' :key="card.id" v-bind:card="card">
-                <div>{{card.organisationName}}</div>
-                </div>
+                <!-- <h2>Organisations</h2> -->
+                <!-- <div v-for='card in orgs' :key="card.id" v-bind:card="card"> -->
+                <!-- <div>{{card.organisationName}}</div> -->
+                <!-- </div> -->
 
 			</div>
 

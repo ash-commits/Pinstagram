@@ -66,6 +66,8 @@ export default {
           showModal: false,
           stories:[],
           file: "",
+          time:0,
+          ten:0,
       image: {},
       user: {
 		type: '',
@@ -132,15 +134,15 @@ export default {
 
         this.user.sourceUrl = downloadUrl
         console.log(downloadUrl)
-
+        this.time=new Date().getTime()
+        this.ten=(600000)
         const body = {
 
             userId : localStorage.getItem('userId'),
             url : downloadUrl,
-            expiryTime: new Date().getTime() + 10 * 60 ,
+            // expiryTime: this.time + this.ten,
             type: this.type
         }
-
         await axios.post('http://10.177.1.207:9000/story',body).then((res)=>{
                     if(res.status === 200){
                         swal({
@@ -155,8 +157,9 @@ export default {
                             text: " File Not uploaded",
                             icon: 'error'
                         })
-                    }              
-                })   
+                    }
+                })
+                console.log(this.time)   
         }
 
 

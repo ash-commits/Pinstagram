@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="profile-bio">
-				<p><span class="profile-real-name">BIO or ABOUT</span>  Team 3 is collectively working on Pinstagram 🏕️</p>
+				<!-- <p><span class="profile-real-name">BIO or ABOUT</span>  Team 3 is collectively working on Pinstagram 🏕️</p> -->
 			</div>
                 <div class="t" for="toggle_button">
                     <span v-if="isActive" class="toggle__label">Following</span>
@@ -43,9 +43,9 @@
             <div class="col-auto">Their Posts</div>
             <div class="col"><hr></div>
     </div>
-    <div v-if="1 === searchResult.id">
-        <YourPost />
-    </div>
+    <!-- <div v-if="1 === searchResult.id"> -->
+        <YourPost :id="searchResult.id"/>
+    <!-- </div> -->
 </div>
 </template>
 
