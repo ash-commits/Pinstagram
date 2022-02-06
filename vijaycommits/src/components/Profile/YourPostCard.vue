@@ -25,10 +25,15 @@
 		    </div>
 		</div>
         <div class="top">
-                <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()">{{ post.numberOfLikes }}</i>
-                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleDisLike()">{{ post.numberOfLikes+1 }}</i></div>&nbsp; &nbsp;
-                <div><i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" @click="toggleDisLike()">{{ post.numberOfDisLikes }}</i>
-                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" @click="toggleLike()">{{ post.numberOfDisLikes+1 }}</i></div>
+                <div>
+                <i v-if="!hasLiked" class="bi bi-heart like-heart" type="radio" name="like" @click="toggleLike()">{{feed.numberOfLikes}}</i>
+                <i v-if="hasLiked" class="bi bi-heart-fill like-heart"  type="radio" name="like" >{{feed.numberOfLikes}}</i>
+                </div>
+                <div class="commentHeart">{{ feed.postedOn }}</div>
+                <div>
+                    <i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" type="radio" name="like" @click="toggleDisLike()">{{feed.numberOfDisLikes}}</i>
+                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" name="like" >{{feed.numberOfDisLikes}}</i>
+                </div>
         </div>
                 <div class="desc"><b>{{ post.userId }}</b>  {{ post.description }}</div><br>
                 <div class="prevCmnt" v-for='oneComment in comments' :key="oneComment.id" v-bind:oneComment="oneComment">
@@ -78,32 +83,21 @@ export default {
     methods: {
         toggleLike () {
             this.flag=true
-            this.hasLiked = !this.hasLiked
+            this.hasLiked = true
+            this.hasDisLiked = false
             if(this.hasLiked)
-            {this.postLikes+=1}
-            else{
-                this.postLikes-=1
-            }
-            if(this.hasDisLiked)
-            {
-                this.postDislikes-=1
-            }
+            {this.postLikes+=1;this.feed.numberOfLikes+=1}
             console.log(this.postLikes)
             // this.sendToBack()
             this.sendLike()
         },
         toggleDisLike () {
             this.flag = false
-            this.hasDisLiked = !this.hasDisLiked
+            this.hasDisLiked = true
+            this.hasLiked = false
             if(this.hasDisLiked)
-            {this.postDisLikes+=1}
-            else{
-                this.postDisLikes-=1
-            }
-            if(this.hasLiked)
-            {
-                this.postLikes-=1
-            }
+            {this.postDisLikes+=1;this.feed.numberOfDisLikes+=1}
+            
             console.log(this.postDisLikes)
             this.sendDisLike()
         },
