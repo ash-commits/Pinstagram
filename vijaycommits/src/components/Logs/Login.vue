@@ -106,7 +106,7 @@ import axios from 'axios'
                 const body = {
                     userEmail: this.email,
                     password: this.password,
-                    appId:2
+                    appId:"2"
                 }  
                 await axios.post('http://10.177.1.200:8000/authentication/authenticate/login',body).then((res)=>{
                     if(res.status === 200){

@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" v-model="password" required>
                     </div>
-                    <span class="dropdown">
+                    <!-- <span class="dropdown">
                         <button class="popsUps" @click="showModal = true" >Upload A Photo To get Registered<i class="bi bi-box-arrow-up"></i></button>
                             <transition name = "fade" appear>
                             <div class="modal-overlay" v-if="showModal"></div>
@@ -57,8 +57,8 @@
                             <br>
                             </div>
                         </transition>
-                    </span>
-                    <!-- <button type="button" class="btn btn-info mt-2" v-on:click="checking()">Submit</button> -->
+                    </span> -->
+                    <button type="button" class="btn btn-info mt-2" v-on:click="getRegistered()">Submit</button>
                 </form>
                 <div class="card-body">
                     <p class="card-text">By signing up, you <b>agree to our Terms, Data Policy</b> and <b>Cookie Policy</b>.</p>
@@ -129,17 +129,17 @@ export default{
                 userEmail: this.email,
                 contact: this.contact,
                 password: this.password,
-                appId:3,
+                appId:2,
                 name:this.name,
-                profileUrl:downloadUrl
-            }
+           }
             await axios.post('http://10.177.1.200:8000/authentication/authenticate/register',body).then((res)=>{
-            if(res.data.status === 200){
+            if(res.status === 200){
                 swal({
                     text: "Successfully Registerd",
                     icon: 'success'
                 }),
                 this.$router.push({name: 'Login'})
+                this.sendToSearch()
             }
             else{
                 swal({
@@ -148,6 +148,15 @@ export default{
                 })
             }              
             })
+        },
+         async sendToSearch()
+        {
+            const body = {
+                id: this.email,
+                name: this.name,
+                type:false
+            }
+            await axios.post('http://10.177.1.207:9000/user/add',body)
         },
         handleFileUpload(event) {
       this.file = event.target.files[0];

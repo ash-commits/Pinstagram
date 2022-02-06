@@ -17,12 +17,14 @@ export default {
     data()
     {
       return{
-          suggestions:[]
+          suggestions:[],
+          userId: ''
       }  
     },
     methods: {
         async fetchSuggestions(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.suggestions = res.data}).catch(err=>console.log(err))
+            this.userId=localStorage.getItem('userId')
+            await axios.get(`http://10.177.1.200/recommendation/recommend/${this.userId}`).then((res)=> {this.suggestions = res.data}).catch(err=>console.log(err))
         }
     },
     mounted() {

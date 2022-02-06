@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col"><hr></div>
         </div>
-        <p><b> {{ suggestion.title }}</b> from {{ suggestion.id }} <b> ok we are fetching </b> </p>
+        <!-- <p><b> {{ suggestion.title }}</b> from {{ suggestion.id }} <b> ok we are fetching </b> </p> -->
+        <img :src="suggestion.url">
         <div class="row">
             <div class="col"><hr></div>
         </div>
