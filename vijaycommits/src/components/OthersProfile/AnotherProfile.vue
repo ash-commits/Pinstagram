@@ -13,7 +13,7 @@
 			<div class="profile-user-settings">
             	<h2 class="profile-user-name">{{searchResult.name}}</h2>
             	<h2 class="profile-user-name">{{searchResult.id}}</h2>
-                <div v-if="1 === searchResult.type">
+                <div v-if="true === searchResult.type">
                     <i class="bi bi-check"></i>
                 </div>
 			</div>
@@ -36,7 +36,7 @@
                     <input type="checkbox" id="toggle_button" v-model="checkedValue">
                     <span class="toggle__switch"></span>
                 </div>
-		</div>
+		    </div>
 	</div>
     <div class="row">
             <div class="col"><hr></div>

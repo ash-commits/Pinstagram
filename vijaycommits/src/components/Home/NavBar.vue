@@ -39,7 +39,6 @@
     <select v-model="user.type">
         <option disabled value="">Please select one</option>
         <option>Image</option>
-        <option>Audio</option>
         <option>Video</option>
     </select>
     <span>Selected: {{ user.type }}</span>
@@ -72,9 +71,7 @@
 
 <script>
 import axios from 'axios'
-
 import firebase from 'firebase';
-
 export default{
     name: 'NavBar',
     pop: 'popup',

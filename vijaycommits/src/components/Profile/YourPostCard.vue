@@ -11,7 +11,7 @@
             <img :src="post.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="bi bi-heart"></i> 56</li>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="bi bi-heart"></i> {{ post.numberOfLikes }}</li>
 						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="bi bi-chat" aria-hidden="true"></i> 2</li>
 					</ul>
 				</div>
@@ -25,16 +25,22 @@
 		    </div>
 		</div>
         <div class="top">
-                <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()"></i>
-                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()"></i></div>
-                <div class="commentHeart"><i class="bi bi-chat"></i></div>
+                <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()">{{ post.numberOfLikes }}</i>
+                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()">{{ post.numberOfLikes+1 }}</i></div>
+                <div><i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" @click="toggleDisLike()">{{ post.numberOfDisLikes }}</i>
+                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" @click="toggleDisLike()">{{ post.numberOfDisLikes+1 }}</i></div>
         </div>
-        <div class="desc"><b>{{post.userId}}</b>  {{post.description}}</div><br>
+                <div class="desc"><b>{{post.userId}}</b>  {{post.description}}</div><br>
+                <div class="prevCmnt" v-for='oneComment in comments' :key="oneComment.id" v-bind:oneComment="oneComment">
+                    <div>{{oneComment.userEmail}}      {{oneComment.comment}}</div><br></div>
+                <div v-for='oneComment in currentComments' :key="oneComment.id" v-bind:oneComment="oneComment">
+                    <div>{{oneComment.userId}}    {{oneComment}}</div>
+        </div>
             <div class="post-footer">
                 <div class="emojis" style="margin-left:0;margin-top:5px">&#128512;</div>
-                <div><textarea placeholder="Add comment..." aria-required="true" style="resize:none;border: white;height:20px;text-decoration:none;width:80%;margin-left:0%;font-family: -apple-system,BlinkMacSystemFont"></textarea></div>
+                <div><textarea placeholder="Add comment..." name="cmnt" v-model="currentComment"></textarea></div>
                 <div>
-                    <button class="btn btn-outline-primary" @click="postComment()" style="margin-left:30%;background-color: white;border: white !important; ">Post</button>
+                    <button class="btn btn-outline-primary" @click="sendComment()" style="margin-left:30%;background-color: white;border: white !important; ">Post</button>
                 </div>
             </div>
 		</div>
@@ -42,28 +48,113 @@
 </template>
 
 <script>
-// import CommentListCard from '@/components/Profile/Comment/CommentListCard'
+import axios from 'axios'
 export default {
     props:['post'],
     name: 'YourPostCard',
+    mounted(){
+        this.fetchComments()
+    },
     components: {
         // CommentListCard
     },
     data () {
         return {
+            likes: 0,
+            like :false,
+            disLike :false,
+            hasDisLiked: false,
             hasLiked: false,
-            likes: 0
+            comment:'',
+            currentComment: '',
+            comments:[],
+            tmp:[],
+            user:localStorage.getItem("userId"),
+            currentComments:[]   
         }
     },
     methods: {
         toggleLike () {
+            this.flag=true
             this.hasLiked = !this.hasLiked
             if(this.hasLiked)
-            {this.likes+=1}
+            {this.postLikes+=1}
             else{
-                this.likes-=1
+                this.postLikes-=1
             }
-            console.log(this.likes)
+            if(this.hasDisLiked)
+            {
+                this.postDislikes-=1
+            }
+            console.log(this.postLikes)
+            // this.sendToBack()
+            this.sendLike()
+        },
+        toggleDisLike () {
+            this.flag = false
+            this.hasDisLiked = !this.hasDisLiked
+            if(this.hasDisLiked)
+            {this.postDisLikes+=1}
+            else{
+                this.postDisLikes-=1
+            }
+            if(this.hasLiked)
+            {
+                this.postLikes-=1
+            }
+            console.log(this.postDisLikes)
+            this.sendDisLike()
+        },
+        async sendLike(){
+                        this.like=true
+                        this.disLike=false
+
+            console.log("came here!!")
+            console.log("disLike"+this.disLike)
+            console.log("like"+this.like)
+            if(this.disLike){
+                this.numberOfDisLikes-1;
+            }
+            const body = {
+                postId : this.post.id,
+                reactionType : true,
+                reactionBy : localStorage.getItem('userId')
+            }
+            await axios.post(`http://10.177.1.207:9000/reaction`,body).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
+        },
+        async sendDisLike(){
+                        this.disLike = true
+                        this.like=false
+
+            console.log("disLike"+this.disLike)
+            console.log("like"+this.like)
+            if(this.like){
+                this.numberOfLikes-1;
+            }
+            console.log("came here!!")
+            const body = {
+                postId : this.post.id,
+                reactionType : false,
+                reactionBy : localStorage.getItem('userId')
+            }
+            await axios.post(`http://10.177.1.207:9000/reaction`,body).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
+        },
+        async sendComment(){
+            console.log("skdjnflkn")
+            const body ={
+                postId: this.post.id,
+                userEmail: localStorage.getItem('userId'),
+                comment:this.currentComment,
+            }
+            console.log(body)
+            await axios.post(`http://10.177.1.207:9000/comment/add`,body).then((res)=> {}).catch(err=>console.log(err))
+            this.currentComments.push(this.currentComment)
+    },
+        async fetchComments(){
+            console.log("called")
+            console.log(this.post.id)
+            await axios.get(`http://10.177.1.207:9000/comment/post/${this.post.id}`).then((res)=> {this.comments = res.data}).catch(err=>console.log(err))
+                // console.log(this.tmp.id)
         }
     }
 

@@ -68,9 +68,6 @@ export default {
             postId: '',
             comment:'',
             currentComment: '',
-            // thisComment = {
-            //     comment:'',
-            // },
             comments:[],
             tmp:[],
             user:localStorage.getItem("userId"),

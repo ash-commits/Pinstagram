@@ -51,8 +51,9 @@
 
             </div>
         </div>
+                    <!-- <router-link :to ="{name: 'AnotherProfile', params: {id: org.organisationId}}"><h4 class="router">{{org.organisationName}}</h4></router-link> -->
         </center>
-            <!-- <router-link :to ="{name: 'AnotherProfile', params: {id: card.id}}"><h4 class="router">{{card.title}}</h4></router-link> -->
+
         <!-- <div class="follow-btn" style="margin-right:25%"> -->
             <!-- <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">Follow</button> -->
         <!-- </div> -->
