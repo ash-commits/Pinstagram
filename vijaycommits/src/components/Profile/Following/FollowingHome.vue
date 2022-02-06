@@ -21,7 +21,7 @@ import Profile from '@/components/Profile/Profile.vue'
 import NavBar from '@/components/Home/NavBar.vue'
 import FollowingListCard from '@/components/Profile/Following/FollowingListCard.vue'
     export default{
-        name: 'ProfileHome',
+        name: 'FollowingHome',
         components: {
             Profile,
             NavBar,

@@ -33,9 +33,9 @@
         </div>
                 <div class="desc"><b>{{ feed.userId }}</b>  {{ feed.description }}</div><br>
                 <div class="prevCmnt" v-for='oneComment in comments' :key="oneComment.id" v-bind:oneComment="oneComment">
-                    <div>{{oneComment.userEmail}}      {{oneComment.comment}}</div><br></div>
+                    <div class="leftshift">{{oneComment.userEmail}}    :  {{oneComment.comment}}</div><br></div>
                 <div v-for='oneComment in currentComments' :key="oneComment.id" v-bind:oneComment="oneComment">
-                    <div>
+                    <div class="leftshift">
                     {{oneComment.userId}}    {{oneComment}}</div>
                 </div>
             <div class="post-footer">
@@ -43,7 +43,7 @@
 
                 <div><textarea placeholder="Add comment..." aria-required="true" name="cmnt" v-model="currentComment"></textarea></div>
                 <div>
-                    <button class=" post btn btn-outline-primary" @click="sendComment()">Post</button>
+                    <button class=" post btn btn-outline-primary"  style="font-family: billabong, sans-serif;font-size: 30px;" @click="sendComment()">Post</button>
                 </div>
             </div>
 		</div>
@@ -162,6 +162,29 @@ export default {
 
 
 <style scoped>
+textarea{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 30px;
+width:30px;
+height:20px;
+}
+
+.post{
+font-family: "billabong", sans-serif;
+font-size: 30px;
+}
+
+.leftshift{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 25px;
+width:300px;
+height:2px;
+margin-right: 700px;
+text-align:left;
+margin-top: 6%;
+}
 .prevCmnt{
     margin-top: -30px;
     margin-bottom: 3px;

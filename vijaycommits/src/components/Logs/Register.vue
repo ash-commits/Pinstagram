@@ -16,10 +16,10 @@
                     </div>
                 <form class="insideForm">
                     <div class="form-group">
-                        <input type="text" class="form-control mb-2" id="inputNumber" aria-describedby="emailHelp" placeholder="Enter mobile Number" name="phoneNo" v-model="phoneNo" required>
+                        <input type="text" class="form-control mb-2" id="inputNumber" aria-describedby="emailHelp" placeholder="Enter mobile Number" name="contact" v-model="contact" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control mb-2" id="fullName" aria-describedby="emailHelp" placeholder="Enter name (considered As UserName)" name="fullName" v-model="fullName" required>
+                        <input type="text" class="form-control mb-2" id="fullName" aria-describedby="emailHelp" placeholder="Enter name " name="name" v-model="name" required>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control mb-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" v-model="email" required>
@@ -28,14 +28,14 @@
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" v-model="password" required>
                     </div>
                     <span class="dropdown">
-                        <button class="popsUps" @click="showModal = true" ><i class="bi bi-box-arrow-up"></i></button>
+                        <button class="popsUps" @click="showModal = true" >Upload A Photo To get Registered<i class="bi bi-box-arrow-up"></i></button>
                             <transition name = "fade" appear>
                             <div class="modal-overlay" v-if="showModal"></div>
                             </transition>
                             <transition name = "slide" appear>
                                 <div class="mod" v-if="showModal"> 
                                 <div class="modal-header mt-10">
-                                <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new Post</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
+                                <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Upload your picture</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
                                 </div>
 
                             <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
@@ -58,7 +58,7 @@
                             </div>
                         </transition>
                     </span>
-                    <button type="button" class="btn btn-info mt-2" v-on:click="checking()">Submit</button>
+                    <!-- <button type="button" class="btn btn-info mt-2" v-on:click="checking()">Submit</button> -->
                 </form>
                 <div class="card-body">
                     <p class="card-text">By signing up, you <b>agree to our Terms, Data Policy</b> and <b>Cookie Policy</b>.</p>
@@ -109,8 +109,8 @@ export default{
     {
         return{
             showModal:false,
-            phoneNo: '',
-            fullName: '',
+            contact: '',
+            name: '',
             email: '',
             password: '',
             user: {
@@ -126,13 +126,15 @@ export default{
         },
         async getRegistered(){
             const body = {
-                email: this.email,
-                phoneNo: this.phoneNo,
+                userEmail: this.email,
+                contact: this.contact,
                 password: this.password,
-                fullName: this.fullName
+                appId:3,
+                name:this.name,
+                profileUrl:downloadUrl
             }
-            await axios.post('',body).then((res)=>{
-            if(res.data.status === 201){
+            await axios.post('http://10.177.1.200:8000/authentication/authenticate/register',body).then((res)=>{
+            if(res.data.status === 200){
                 swal({
                     text: "Successfully Registerd",
                     icon: 'success'
@@ -199,23 +201,22 @@ export default{
         console.log(downloadUrl)
 
         const body = {
-
-            userId : localStorage.getItem('userId'),
-            url : downloadUrl,
-            description: this.description,
-            category: "common",
-            postedOn: Math.round(+new Date()/1000),
-            type: this.type
+                userEmail: this.email,
+                contact: this.contact,
+                password: this.password,
+                appId:2,
+                name:this.name,
+                profileUrl:downloadUrl
         }
 
-        await axios.post('http://10.177.1.207:9000/post',body).then((res)=>{
+        await axios.post('http://10.177.1.200:8000/authentication/authenticate/register',body).then((res)=>{
                     if(res.status === 200){
                         swal({
                             text: "file uploaded",
                             icon: 'success'
                         }),
                         console.log(res.status)
-                    this.$router.push({name: 'Home'})
+                    this.$router.push({name: 'Login'})
                     }
                     else{
                         swal({
@@ -223,7 +224,8 @@ export default{
                             icon: 'error'
                         })
                     }              
-                })   
+                })
+        // await axios.post('http://10.177.1.207:')   
         }
         }
         catch(error){

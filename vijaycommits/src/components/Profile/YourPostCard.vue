@@ -26,25 +26,27 @@
 		</div>
         <div class="top">
                 <div><i v-if="!hasLiked" class="bi bi-heart like-heart" @click="toggleLike()">{{ post.numberOfLikes }}</i>
-                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleLike()">{{ post.numberOfLikes+1 }}</i></div>
+                <i v-if="hasLiked" class="bi bi-heart-fill like-heart" @click="toggleDisLike()">{{ post.numberOfLikes+1 }}</i></div>&nbsp; &nbsp;
                 <div><i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" @click="toggleDisLike()">{{ post.numberOfDisLikes }}</i>
-                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" @click="toggleDisLike()">{{ post.numberOfDisLikes+1 }}</i></div>
+                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" @click="toggleLike()">{{ post.numberOfDisLikes+1 }}</i></div>
         </div>
-                <div class="desc"><b>{{post.userId}}</b>  {{post.description}}</div><br>
+                <div class="desc"><b>{{ post.userId }}</b>  {{ post.description }}</div><br>
                 <div class="prevCmnt" v-for='oneComment in comments' :key="oneComment.id" v-bind:oneComment="oneComment">
-                    <div>{{oneComment.userEmail}}      {{oneComment.comment}}</div><br></div>
+                    <div class="leftshift">{{oneComment.userEmail}}    :  {{oneComment.comment}}</div><br></div>
                 <div v-for='oneComment in currentComments' :key="oneComment.id" v-bind:oneComment="oneComment">
-                    <div>{{oneComment.userId}}    {{oneComment}}</div>
+                    <div class="leftshift">
+                    {{oneComment.userId}}    {{oneComment}}</div>
+                </div>
         </div>
             <div class="post-footer">
-                <div class="emojis" style="margin-left:0;margin-top:5px">&#128512;</div>
-                <div><textarea placeholder="Add comment..." name="cmnt" v-model="currentComment"></textarea></div>
+                <div class="emojis" style="margin-left:0">&#128512;</div>
+
+                <div><textarea placeholder="Add comment..." aria-required="true" name="cmnt" v-model="currentComment" required style="resize:none"></textarea></div>
                 <div>
-                    <button class="btn btn-outline-primary" @click="sendComment()" style="margin-left:30%;background-color: white;border: white !important; ">Post</button>
+                    <button class=" post btn btn-outline-primary"  style="font-family: billabong, sans-serif;font-size: 30px;" @click="sendComment()">Post</button>
                 </div>
             </div>
 		</div>
-    </div>
 </template>
 
 <script>
@@ -163,6 +165,29 @@ export default {
 
 
 <style scoped>
+textarea{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 25px;
+width:470px;
+height:30px;
+}
+
+.post{
+font-family: "billabong", sans-serif;
+font-size: 30px;
+}
+
+.leftshift{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 25px;
+width:300px;
+height:2px;
+margin-right: 700px;
+text-align:left;
+margin-top: 6%;
+}
 
 .desc{
     float: left;

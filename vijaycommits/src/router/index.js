@@ -9,16 +9,10 @@ import ViewStory from '@/components/Stories/ViewStory.vue'
 import FollowersHome from '@/components/Profile/Followers/FollowersHome.vue'
 import FollowingHome from '@/components/Profile/Following/FollowingHome.vue'
 import AnotherProfile from '@/components/OthersProfile/AnotherProfile.vue'
-// import FollowerCard from '@/components/profile/FollowerCard'
-// import FollowerListCard from '@/components/profile/FollowerListCard'
-// import ViewStory from '@/components/Stories/ViewStory.vue'
-// import FollowingCard from '@/components/Profile/Following/FollowingCard'
-// import FollowingListCard from '@/components/Profile/Following/FollowingListCard'
 import YourPostCard from '@/components/Profile/YourPostCard'
 import Createpost from '@/components/Home/Createpost'
 import OrganisationHome from '@/components/Profile/Organisation/OrganisationHome'
 import SearchHome from '@/components/Search/SearchHome.vue'
-// import CommentListCard from '@/components/Profile/Comment/CommentListCard'
 Vue.use(Router)
 
 export default new Router({

@@ -10,7 +10,7 @@
             <router-link :to ="{name: 'AnotherProfile', params: {id: card.id}}"><h4 class="router">{{card}}</h4></router-link>
         </div>
         <div class="follow-btn" style="margin-right:25%">
-            <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">{{card}}</button>
+            <!-- <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">{{card}}</button> -->
         </div>
     </div>
 </template>

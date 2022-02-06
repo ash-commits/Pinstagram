@@ -36,12 +36,22 @@
 
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
                     <div>
+                        <center>
     <select v-model="user.type">
         <option disabled value="">Please select one</option>
         <option>Image</option>
         <option>Video</option>
-    </select>
-    <span>Selected: {{ user.type }}</span>
+    </select><br>
+        <span>Selected: {{ user.type }}</span><br>
+    <select v-model="user.cat">
+        <option disabled value="">Please select one</option>
+        <option>sport</option>
+        <option>lifestyle</option>
+        <option>e-commercial</option>
+        <option>education</option>
+        <option>Cinematic</option>
+    </select></center>
+        <span>Selected: {{ user.cat }}</span><br>
     <hr />
     <input type="file" @change="handleFileUpload($event)" />
   <div v-if="image">
@@ -88,8 +98,10 @@ export default{
         category: '',
       image: {},
       type:true,
+      category: '',
       user: {
         type: '',
+        cat:''
       }
       }
     },
@@ -99,11 +111,28 @@ export default{
             console.log(this.searching)
             this.$router.push({name:'SearchHome', query: { searchQuery: this.searching}}).catch(()=>{})
         },
-        getMeLogOut()
-        {
-            this.$router.push({name:'Login'})
-            console.log("ayya vachanayya  !!!")
-        },
+        async getMeLogOut(){
+                const body = {
+                    userEmail: this.email,
+                    appId:2
+                }  
+                await axios.post('http://10.177.1.200:8000/authentication/authenticate/logout',body).then((res)=>{
+                    if(res.status === 200){
+                        swal({
+                            text: "Logout is Successful",
+                            icon: 'success'
+                        }),
+                        this.$router.push({name: 'Login'})
+                        localStorage.clear()                            
+                    }
+                    else{
+                        swal({
+                            text: "Failed To Login",
+                            icon: 'error'
+                        })
+                    }              
+                })
+            },
         previewImage(event) {
       this.uploadValue=0;
       this.picture=null;
@@ -127,10 +156,6 @@ export default{
         {
             this.type=true
         this.contentTypeLocal= 'image/png'
-        }
-        else if(this.user.type === "Audio")
-        {
-            this.contentTypeLocal= 'audio/mp3'
         }
         else if(this.user.type === "Video")
         {   
@@ -159,15 +184,16 @@ export default{
 
         this.user.sourceUrl = downloadUrl
         console.log(downloadUrl)
+        console.log(this.user.cat)
 
         const body = {
 
             userId : localStorage.getItem('userId'),
             url : downloadUrl,
             description: this.description,
-            category: "common",
+            category: this.user.cat,
             postedOn: Math.round(+new Date()/1000),
-            type: this.type
+            type: this.type,
         }
 
         await axios.post('http://10.177.1.207:9000/post',body).then((res)=>{

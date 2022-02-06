@@ -9,7 +9,7 @@
         <center>
         <div class="org">
             <div class="naming">
-            <h3>{{org.organisationName}}</h3>
+            <h3>{{org.organisationName}}---->Upload from Here</h3>
             </div>
             <div>
                 <span class="dropdown">
@@ -20,27 +20,36 @@
                   <transition name = "slide" appear>
                    <div class="mod" v-if="showModal"> 
                      <div class="modal-header mt-10">
-                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new Post</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
+                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new Post From Organisation</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
                      </div>
 
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
                     <div>
-    <select v-model="user.type">
+                        <center>
+                    <select v-model="user.type">
+                        <option disabled value="">Please select one</option>
+                        <option>Image</option>
+                        <option>Video</option>
+                    </select><br>
+                <span>Selected: {{ user.type }}</span><br>
+                <select v-model="user.cat">
         <option disabled value="">Please select one</option>
-        <option>Image</option>
-        <option>Audio</option>
-        <option>Video</option>
-    </select>
-    <span>Selected: {{ user.type }}</span>
-    <hr />
-    <input type="file" @change="handleFileUpload($event)" />
-  <div v-if="image">
-    <img :src="image.src" />
-    </div>
-  	<br>
-      <div  >
-      <input class ="cap" type ="text" name="description" v-model="description" placeholder = "Add Caption . . .">
-      </div>
+        <option>sport</option>
+        <option>lifestyle</option>
+        <option>e-commercial</option>
+        <option>education</option>
+        <option>Cinematic</option>
+    </select><br>
+        <span>Selected: {{ user.cat }}</span></center><br>
+                <hr />
+                <input type="file" @change="handleFileUpload($event)" />
+                <div v-if="image">
+                    <img :src="image.src" />
+                </div>
+  	            <br>
+                <div>
+                <input class ="cap" type ="text" name="description" v-model="description" placeholder = "Add Caption . . .">
+            </div>
 	<button v-on:click="handleSubmit()">Submit</button>
   </div>
                     </div>
@@ -183,7 +192,7 @@ export default{
     }
 }
 </script>
-<style>
+<style scoped>
 .naming{
     margin-left: 450px;
 }
@@ -204,13 +213,21 @@ a:hover{
 .img{
     width: 30
 }
-.follower-card{
+.organisation-card{
     display: flex;
     justify-content: space-between;
     margin-top:2%;
     margin-bottom: 2%;
     /* border-bottom: 2px solid black; */
 }
+
+.popsUps{
+    background-color: white;
+    border: none;
+    border-radius: 40px;
+}
+
+/* end header */
 
 .mod .mt-10{
   font-family: "billabong", sans-serif;

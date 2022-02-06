@@ -104,30 +104,31 @@ import axios from 'axios'
             
             async getMeLogIn(){
                 const body = {
-                    email: this.email,
+                    userEmail: this.email,
                     password: this.password,
+                    appId:2
                 }  
-                localStorage.setItem('userId',"A")
+                await axios.post('http://10.177.1.200:8000/authentication/authenticate/login',body).then((res)=>{
+                    if(res.status === 200){
+                        swal({
+                            text: "Login is Successful",
+                            icon: 'success'
+                        }),
+                        this.$router.push({name: 'Home'})
+                        localStorage.setItem('userId',this.email)
+                            //   localStorage.setItem('storedData', this.input)
 
-            //     await axios.post('123',body).then((res)=>{
-            //         if(res.data.status === 201){
-            //             localStorage.setItem('userId',"A")
-            //             swal({
-            //                 text: "Login is Successful",
-            //                 icon: 'success'
-            //             }),
-            //         this.$router.push({name: 'Home'})
-            //         }
-            //         else{
-            //             swal({
-            //                 text: "Failed To Login",
-            //                 icon: 'error'
-            //             })
-            //         }              
-            //     })
-            // }
-        }
-    },
+
+                    }
+                    else{
+                        swal({
+                            text: "Failed To Login",
+                            icon: 'error'
+                        })
+                    }              
+                })
+            }
+        },
     computed: {
             currentImg: function () {
             return this.images[Math.abs(this.currentIndex) % this.images.length]

@@ -1,10 +1,9 @@
 <template>
-    <div>
-        <div><button class="leftClass" v-on:click="goToPrev()">Previous Story</button></div>
-        <div><button class="rightClass" v-on:click="goToNext()">Next Story</button></div>
+    <div class="bg">
+        <center>
         <div class="stayTogether">
             <div>
-                <!-- <p><b>{{ storyLocalId.title }}</b> has posted this story</p> -->
+                <p><b>{{ storyLocalId.userId }}</b> has posted this story</p>
             </div>
             <div style="margin-left:50px;margin-bottom:15px">
                 <button class="btn btn-outline-danger" v-on:click="goHome()">X</button>
@@ -16,8 +15,8 @@
             <img :src="story.url" class="gallery-image" alt="">
 				<div class="gallery-item-info">
 					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> </li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i></li>
 					</ul>
 				</div>
 		</div>
@@ -30,6 +29,7 @@
 		    </div>
 		</div>
 		</div>
+        </center>
     </div>
 </template>
 
@@ -79,6 +79,10 @@ export default {
 </script>
 
 <style scoped>
+.bg
+{
+    background-color: pink;
+}
 .leftClass{
     float: left;
     margin-top: 400px;

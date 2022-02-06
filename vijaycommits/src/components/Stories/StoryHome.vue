@@ -1,25 +1,26 @@
 <template>
     <div class="container">
                 <div class="wrapper" style="margin-right:40px;">
-                    <span class="dropdown">
-                  <button class="popsUps" @click="showModal = true" style="margin-top: 75%;text-align:center;background-color:rgb(95, 135, 167);margin-bottom:15%">New Story</button>
+<span class="dropdown">
+<button class="popsUps" @click="showModal = true" style="margin-top: 27px;text-align: center;background-color: rgb(95, 135, 167);width: 70px;height: 70px;-o-object-fit: cover;object-fit: cover;
+border-radius: 50%;border: 2px solid #fff;background: linear-gradient(45deg, rgb(255, 230, 0), rgb(255, 0, 128) 80%)"><i class="bi bi-plus mb-5" style="font-size:50px;color:black;padding-bottom:5px" ></i></button>
+<p style="display:inline">Your Story</p>
                   <transition name = "fade" appear>
                     <div class="modal-overlay" v-if="showModal"></div>
                   </transition>
                   <transition name = "slide" appear>
                    <div class="mod" v-if="showModal"> 
                      <div class="modal-header mt-10">
-                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new Story</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
+                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>My Story. . . </b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
                      </div>
 
                      <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
                     <div>
-    <select v-model="user.type">
-        <option disabled value="">Please select one</option>
-        <option>Image</option>
-        <option>Audio</option>
-        <option>Video</option>
-    </select>
+                    <select v-model="user.type">
+                        <option disabled value="">Please select one</option>
+                        <option>Image</option>
+                        <option>Video</option>
+                    </select>
     <span>Selected: {{ user.type }}</span>
     <hr />
     <input type="file" @change="handleFileUpload($event)" />
@@ -27,9 +28,6 @@
     <img :src="image.src" />
     </div>
   	<br>
-      <div  >
-      <input class ="cap" type ="text" name="caption" placeholder = "Add Caption . . .">
-      </div>
 	<button v-on:click="handleSubmit()">Submit</button>
   </div>
                     </div>
@@ -180,6 +178,28 @@ export default {
 </script>
 
 <style scoped>
+.mod .mt-10{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 25px;
+}
+
+.mod .modal-body{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 20px;
+}
+
+.options{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 20px;
+}
+.dropdown-menu .dropdown-item{
+font-family: "billabong", sans-serif;
+color: rgb(219, 31, 94);
+font-size: 20px;
+}
 .cap{
   font-family: "billabong", sans-serif;
   color: rgb(219, 31, 94);

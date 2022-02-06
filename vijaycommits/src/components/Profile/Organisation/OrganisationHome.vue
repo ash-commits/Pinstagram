@@ -21,10 +21,10 @@ import Profile from '@/components/Profile/Profile.vue'
 import NavBar from '@/components/Home/NavBar.vue'
 import OrganisationListCard from '@/components/Profile/Organisation/OrganisationListCard.vue'
     export default{
-        name: 'OrganisationHome',
+       name: 'OrganisationHome',
         components: {
-    Profile,
     NavBar,
+    Profile,
     OrganisationListCard
 }
     }
