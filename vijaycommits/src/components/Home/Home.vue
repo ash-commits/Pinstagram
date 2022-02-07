@@ -33,6 +33,7 @@ export default{
 }
 .feedHome{
     padding-top: 150px;
+    /* position: fixed; */
 }
 .home{
     overflow-y: hidden;

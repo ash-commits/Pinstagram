@@ -34,13 +34,29 @@
                     <i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" type="radio" name="like" @click="toggleDisLike()">{{feed.numberOfDisLikes}}</i>
                 <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" name="like" >{{feed.numberOfDisLikes+1}}</i>
                 </div>
+                <span class="dropdown">
+                  <button class="popsUps" @click="showModal = true" ><i class="bi bi-chat"></i></button>
+                  <transition name = "fade" appear>
+                    <div class="modal-overlay" v-if="showModal"></div>
+                  </transition>
+                  <transition name = "slide" appear>
+                   <div class="mod" v-if="showModal"> 
+                     <div class="modal-header mt-10">
+                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Comments . . .</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button>
+                       </span>
+                     </div>
+                     <br>
+                     <div class="prevCmnt" v-for='oneComment in comments' :key="oneComment.id" v-bind:oneComment="oneComment">
+                    <div class="leftshift mt-2 mb-2">{{oneComment.userEmail}}    :  {{oneComment.comment}}</div><br></div>
+                    </div>
+                  </transition>
+            </span>
         </div>
                 <div class="desc"><b>{{ feed.userId }}</b>  {{ feed.description }}</div><br>
-                <div class="prevCmnt" v-for='oneComment in comments' :key="oneComment.id" v-bind:oneComment="oneComment">
-                    <div class="leftshift mt-5 mb-5">{{oneComment.userEmail}}    :  {{oneComment.comment}}</div><br></div>
+                
                 <div v-for='oneComment in currentComments' :key="oneComment.id" v-bind:oneComment="oneComment">
                     <div class="leftshift mt-3 mb-3">
-                    {{oneComment.userId}}    {{oneComment}}</div>
+                    {{oneComment.userEmail}}  :  {{oneComment}}</div>
                 </div>
             <div class="post-footer" style="margin-top:30px">
                 <!-- <div class="emojis" style="margin-left:0">&#128512;</div>
@@ -69,6 +85,7 @@ import axios from 'axios'
 export default {
     props:['feed'],
     name: 'FeedCard',
+    pop: 'popup',
     mounted(){
         this.fetchComments()
     },
@@ -77,6 +94,7 @@ export default {
             like :false,
             disLike :false,
             hasDisLiked: false,
+            showModal: false,
             hasLiked: false,    
             postLikes : this.feed.numberOfLikes,
             postDislikes: this.feed.numberOfDisLikes,
@@ -153,7 +171,7 @@ export default {
             }
             await axios.post(`http://10.177.1.207:9000/comment/add`,body).then((res)=> {}).catch(err=>console.log(err))
             this.currentComments.push(this.currentComment)
-            this.$router.go(0)
+            this.currentComment=''
     },
         async fetchComments(){
             console.log("called")
@@ -166,12 +184,27 @@ export default {
 </script>
 
 
-<style scoped>textarea{
+<style scoped>
+textarea{
 font-family: sans-serif;
 color: rgb(219, 31, 94);
 font-size: 25px;
 width:30px;
 height:20px;
+}
+.bi-chat{
+  background-color: white;
+  border:white;
+
+}
+.btn {
+    display: inline-block;
+    font: inherit;
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    cursor: pointer;
 }
 
 .post{
@@ -198,6 +231,11 @@ margin-bottom: 5%;
     float: left;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+.popsUps{
+    background-color: white;
+    border: none;
+    width:24.91px;
 }
 .post{
     margin-left: 20px;
@@ -363,5 +401,90 @@ img {
     height: 100%;
     object-fit: cover;
 }
+.mod .mt-10{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 25px;
+}
+.mod .modal-body{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+}
+.options{
+  font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+}
+.dropdown-menu .dropdown-item{
+   font-family: "billabong", sans-serif;
+  color: rgb(219, 31, 94);
+  font-size: 20px;
+}
+.modal-header .modal-body .modal-footer{
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 5px;
+  align-self: start;
+  width: 40%;
+}
+.input-class{
+  width: 50%;
+}
 
+.center-content{
+    text-align: center;
+}
+.modal-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 98;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-header .modal-footer .modal-body {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+#select-file {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5;
+}
+
+.mod{
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  z-index: 99;
+  overflow: scroll;
+  width: 100%;
+  max-width: 400px;
+  background-color: whitesmoke;
+  border-radius: 16px;
+  padding: 25px;
+  height: 80%;
+  border-color: black;
+}
+label, input {
+  color: rgb(22, 103, 209);
+  font: 14px/20px Arial;
+}
+
+label {
+  display: inline-block;
+  width: 5em;
+  padding: 0 1em;
+  text-align: right;
+}
+.bi-chat{
+  background-color: white;
+  border:white;
+
+}
 </style>
