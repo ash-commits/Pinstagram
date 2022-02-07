@@ -34,4 +34,7 @@ export default{
 .feedHome{
     padding-top: 150px;
 }
+.home{
+    overflow-y: hidden;
+}
 </style>

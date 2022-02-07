@@ -2,7 +2,7 @@
 <div>
     <div class="navigation"> 
         <div class="logo">
-            <a class="no-underline" href="#/home">Pinstagram</a>
+            <a class="no-underline" href="#/">Pinstagram</a>
         </div>
   
         <div class="navigation-search-container">
@@ -11,7 +11,7 @@
   
         <div class="navigation-icons">
             <div class="navigation-link">
-            <a href="#/home" class="target"><i class="focus bi bi-house"></i></a>
+            <a href="#/" class="target"><i class="focus bi bi-house"></i></a>
             <a href="#/notification" class="target"><i class="bi bi-heart"></i></a>
             <i class="bi bi-bell"></i>
             <span class="dropdown">

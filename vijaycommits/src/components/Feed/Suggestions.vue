@@ -18,13 +18,13 @@ export default {
     {
       return{
           suggestions:[],
-          userId: ''
+          userId: localStorage.getItem('userId')
       }  
     },
     methods: {
         async fetchSuggestions(){
             this.userId=localStorage.getItem('userId')
-            await axios.get(`http://10.177.1.200/recommendation/recommend/${this.userId}`).then((res)=> {this.suggestions = res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.200:8000/recommendation/recommend/${this.userId}`).then((res)=> {this.suggestions = res.data}).catch(err=>console.log(err))
         }
     },
     mounted() {

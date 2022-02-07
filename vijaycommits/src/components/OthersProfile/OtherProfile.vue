@@ -7,14 +7,14 @@
 		<div class="profile">
             
 			<div class="profile-image">
-                <!-- <img :src="searchResult.url" alt="" height="250px" width="250px"> -->
+                <!-- <img :src="card.url" alt="" height="250px" width="250px"> -->
 			</div>
 
 			<div class="profile-user-settings">
-            	<h2 class="profile-user-name">{{searchResult.name}}</h2>
-            	<!-- <h2 class="profile-user-name">{{searchResult.id}}</h2> -->
+            	<h2 class="profile-user-name">{{card}}</h2>
+            	<!-- <h2 class="profile-user-name">{{card.id}}</h2> -->
             
-                <div v-if="true === searchResult.type">
+                <div v-if="true === card.type">
                     <i class="bi bi-check"></i>
                 </div>
 			</div>
@@ -30,7 +30,7 @@
 			<div class="profile-bio">
 				<!-- <p><span class="profile-real-name">BIO or ABOUT</span>  Team 3 is collectively working on Pinstagram 🏕️</p> -->
 			</div>
-                <div v-if="userEmail !== searchResult.id" class="t" for="toggle_button">
+                <div class="t" for="toggle_button">
                     <span v-if="isActive" class="toggle__label">Following</span>
                     <span v-if="! isActive" class="toggle__label">Follow</span>
 
@@ -44,9 +44,9 @@
             <div class="col-auto">Their Posts</div>
             <div class="col"><hr></div>
     </div>
-    <div v-if="true === this.currentState">
-        <YourPost :id="searchResult.id"/>
-    </div>
+    <!-- <div v-if="1 === card.id"> -->
+        <YourPost :id="card.id"/>
+    <!-- </div> -->
 </div>
 </template>
 
@@ -55,8 +55,8 @@ import NavBar from '@/components/Home/NavBar.vue'
 import YourPost from '@/components/Profile/YourPost.vue'
 import axios from 'axios'
     export default{
-        props:['searchResult'],
-        name: 'AnotherProfile',
+        props:['card'],
+        name: 'OtherProfile',
         components:{
             NavBar,
             YourPost
@@ -76,11 +76,11 @@ import axios from 'axios'
             await axios.get(`${id}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
         },
         async getConnectionCount(){
-            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.searchResult.id}`).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.card.id}`).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
             console.log(this.followingCount)
         },
         async postCount(){
-            await axios.get(`http://10.177.1.207:9000/post/getNumberOfPosts/${this.searchResult.id}`).then((res)=> {this.numberOfPost=res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/post/getNumberOfPosts/${this.card.id}`).then((res)=> {this.numberOfPost=res.data}).catch(err=>console.log(err))
             console.log(this.followingCount)
         },
         async ConnectTo()
@@ -89,23 +89,23 @@ import axios from 'axios'
             const body = {
                 userEmail:localStorage.getItem("userId"),
                 connectionType:"following",
-                targetEmail:this.searchResult.id   
+                targetEmail:this.card.id   
             }
             await axios.post(`http://10.177.1.207:9000/connection/add/`, body).then((res)=> {}).catch(err=>console.log(err))
 
         },
         async disconnectTo() {
             this.connection[1]-=1;
-            await axios.delete(`http://10.177.1.207:9000/connection/delete/${this.userEmail}/${this.searchResult.id}`)
+            await axios.delete(`http://10.177.1.207:9000/connection/delete/${this.userEmail}/${this.card.id}`)
         },
         async sendPageView()
         {
-            if(this.searchResult.type !== true)
+            if(this.card.type !== true)
             return;
             const body={
-                pageId: this.searchResult.id,
+                pageId: this.card.id,
                 userId: localStorage.getItem('userId'),
-                pageName: this.searchResult.name
+                pageName: this.card.name
             }
             await axios.post(`http://10.177.1.207:9000/organisation/keepUpdated`,body)
         }
@@ -113,7 +113,7 @@ import axios from 'axios'
     async mounted() {
         
         this.profileUser = this.id
-        await axios.get(`http://10.177.1.207:9000/connection/check/${this.userEmail}/${this.searchResult.id}`).then((res)=>{this.currentState=res.data}).catch(err=>console.log(err))
+        await axios.get(`http://10.177.1.207:9000/connection/check/${this.userEmail}/${this.card.id}`).then((res)=>{this.currentState=res.data}).catch(err=>console.log(err))
         // this.fetchProfile(this.id)
         this.getConnectionCount()
         this.postCount()

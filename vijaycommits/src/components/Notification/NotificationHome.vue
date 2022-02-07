@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         async fetchNotifications(){
-            await axios.get('https://jsonplaceholder.typicode.com/photos').then((res)=> {this.Notifications = res.data}).catch(err=>console.log(err))
+            await axios.get('').then((res)=> {this.Notifications = res.data}).catch(err=>console.log(err))
         }
     },
     mounted() {

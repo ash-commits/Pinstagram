@@ -38,12 +38,12 @@ export default {
     line-height: 30px;
 }
 .suggestions{
-    /* flex: 3; */
+    flex: 3;
     height: 100vh;
-    margin-left: 10px;
+    margin-left: 5px;
     overflow: scroll;
     /* position: fixed; */
-    max-width: 400px;
+    max-width: 500px;
     line-height: 30px;
 }
 </style>

@@ -138,7 +138,7 @@ export default {
 
             userId : localStorage.getItem('userId'),
             url : downloadUrl,
-            // expiryTime: this.time + this.ten,
+            expiryTime: this.time + this.ten,
             type: this.type
         }
         await axios.post('http://10.177.1.207:9000/story',body).then((res)=>{

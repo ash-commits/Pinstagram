@@ -18,7 +18,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
       component: Home
     },
@@ -66,6 +66,12 @@ export default new Router({
       props: true,
     },
     {
+      path: '/other/:id',
+      name: 'OtherProfile',
+      component: AnotherProfile,
+      props: true,
+    },
+    {
       path: '/yourpostcard',
       name: 'YourPostCard',
       component: YourPostCard
@@ -85,10 +91,6 @@ export default new Router({
       name: 'SearchHome',
       component: SearchHome
     },
-    // {
-    //   path: '/comment',
-    //   name: 'CommentListCard',
-    //   component: CommentListCard
-    // }
+    
   ]
 })

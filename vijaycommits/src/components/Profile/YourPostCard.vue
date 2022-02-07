@@ -12,7 +12,7 @@
 				<div class="gallery-item-info">
 					<ul>
 						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="bi bi-heart"></i> {{ post.numberOfLikes }}</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="bi bi-chat" aria-hidden="true"></i> 2</li>
+						<!-- <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="bi bi-chat" aria-hidden="true"></i></li> -->
 					</ul>
 				</div>
 		</div>
@@ -26,13 +26,13 @@
 		</div>
         <div class="top">
                 <div>
-                <i v-if="!hasLiked" class="bi bi-heart like-heart" type="radio" name="like" @click="toggleLike()">{{feed.numberOfLikes}}</i>
-                <i v-if="hasLiked" class="bi bi-heart-fill like-heart"  type="radio" name="like" >{{feed.numberOfLikes}}</i>
+                <i v-if="!hasLiked" class="bi bi-heart like-heart" type="radio" name="like" @click="toggleLike()">{{post.numberOfLikes}}</i>
+                <i v-if="hasLiked" class="bi bi-heart-fill like-heart"  type="radio" name="like" >{{post.numberOfLikes+1}}</i>
                 </div>
-                <div class="commentHeart">{{ feed.postedOn }}</div>
+                <!-- <div class="commentHeart">{{ post.postedOn }}</div> -->
                 <div>
-                    <i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" type="radio" name="like" @click="toggleDisLike()">{{feed.numberOfDisLikes}}</i>
-                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" name="like" >{{feed.numberOfDisLikes}}</i>
+                    <i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" type="radio" name="like" @click="toggleDisLike()">{{post.numberOfDisLikes}}</i>
+                <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" name="like" >{{post.numberOfDisLikes+1}}</i>
                 </div>
         </div>
                 <div class="desc"><b>{{ post.userId }}</b>  {{ post.description }}</div><br>
@@ -43,7 +43,7 @@
                     {{oneComment.userId}}    {{oneComment}}</div>
                 </div>
         </div>
-            <div class="post-footer">
+            <div class="post-footer"  style="margin-top:30px">
                 <div class="emojis" style="margin-left:0">&#128512;</div>
 
                 <div><textarea placeholder="Add comment..." aria-required="true" name="cmnt" v-model="currentComment" required style="resize:none"></textarea></div>
@@ -77,7 +77,11 @@ export default {
             comments:[],
             tmp:[],
             user:localStorage.getItem("userId"),
-            currentComments:[]   
+            currentComments:[],
+
+
+            likeCount:0,
+            disLikeCount:0.
         }
     },
     methods: {
@@ -86,7 +90,7 @@ export default {
             this.hasLiked = true
             this.hasDisLiked = false
             if(this.hasLiked)
-            {this.postLikes+=1;this.feed.numberOfLikes+=1}
+            {this.postLikes+=1;}
             console.log(this.postLikes)
             // this.sendToBack()
             this.sendLike()
@@ -96,7 +100,7 @@ export default {
             this.hasDisLiked = true
             this.hasLiked = false
             if(this.hasDisLiked)
-            {this.postDisLikes+=1;this.feed.numberOfDisLikes+=1}
+            {this.postDisLikes+=1;}
             
             console.log(this.postDisLikes)
             this.sendDisLike()
@@ -190,7 +194,7 @@ margin-top: 6%;
 }
 .post-footer {
     display: flex;
-    margin-top:10px;
+    margin-top:30px;
     margin-left: 0px;
 }
 .like-heart {

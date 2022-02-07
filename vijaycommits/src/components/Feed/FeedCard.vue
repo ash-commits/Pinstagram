@@ -12,7 +12,7 @@
 				<div class="gallery-item-info">
 					<ul>
 						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="bi bi-heart"></i> {{feed.numberOfLikes}} </li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="bi bi-chat" aria-hidden="true"></i> 2</li>
+						<!-- <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="bi bi-chat" aria-hidden="true"></i> </li> -->
 					</ul>
 				</div>
 		</div>
@@ -42,7 +42,7 @@
                     <div class="leftshift">
                     {{oneComment.userId}}    {{oneComment}}</div>
                 </div>
-            <div class="post-footer">
+            <div class="post-footer" style="margin-top:30px">
                 <div class="emojis" style="margin-left:0">&#128512;</div>
 
                 <div><textarea placeholder="Add comment..." aria-required="true" name="cmnt" v-model="currentComment"></textarea></div>
@@ -196,7 +196,7 @@ textarea{
 }
 .post-footer {
     display: flex;
-    margin-top:10px;
+    margin-top:30px;
     margin-left: 0px;
 }
 .like-heart {
@@ -259,7 +259,7 @@ img {
 }
 
 .container {
-    max-width: 43.5rem;
+    max-width: 40.5rem;
     margin: 0 auto;
     padding: 0 2rem;
     margin-bottom: 20px;
