@@ -20,10 +20,11 @@
                   <transition name = "slide" appear>
                    <div class="mod" v-if="showModal"> 
                      <div class="modal-header mt-10">
-                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create new Post From Organisation</b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
+                       <p style="margin-top:4;margin-bottom:0%;margin-left:25%;margin-right:20%"><b>Create </b></p><span><button type="button" class="btn btn-outline-danger" @click="showModal=false" >X</button></span>
                      </div>
 
-                     <div class="modal-body"><p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p>
+                     <div class="modal-body">
+                       <!-- <p style="margin-top:45%;margin-bottom:3%;font-size:larger;color:black">Drag photos and videos here</p> -->
                     <div>
                         <center>
                     <select v-model="user.type">
@@ -50,7 +51,7 @@
                 <div>
                 <input class ="cap" type ="text" name="description" v-model="description" placeholder = "Add Caption . . .">
             </div>
-	<button v-on:click="handleSubmit()">Submit</button>
+	<center><button v-on:click="handleSubmit()" style="margin-right:0px;font-family:sans-serif;background-color:white;border:2px solid black">Submit</button></center>
   </div>
                     </div>
                      <br>

@@ -110,6 +110,7 @@ export default{
         {
             console.log(this.searching)
             this.$router.push({name:'SearchHome', query: { searchQuery: this.searching}}).catch(()=>{})
+            this.$router.go(0)
         },
         async getMeLogOut(){
                 const body = {
@@ -203,7 +204,8 @@ export default{
                             icon: 'success'
                         }),
                         console.log(res.status)
-                    this.$router.push({name: 'Home'})
+                    // this.$router.push({name: 'Home'})
+                    this.$router.go(0)
                     }
                     else{
                         swal({

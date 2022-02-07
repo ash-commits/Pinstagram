@@ -26,10 +26,10 @@
 		</div>
         <div class="top">
                 <div>
-                <i v-if="!hasLiked" class="bi bi-heart like-heart" type="radio" name="like" @click="toggleLike()">{{feed.numberOfLikes}}</i>
+                <i v-if="!hasLiked" class="bi bi-heart like-heart" type="radio" name="like" @click="toggleLike()">{{feed.numberOfLikes}}</i>&nbsp; &nbsp;
                 <i v-if="hasLiked" class="bi bi-heart-fill like-heart"  type="radio" name="like" >{{feed.numberOfLikes+1}}</i>
                 </div>
-                <div class="commentHeart">{{ feed.postedOn }}</div>
+                <!-- <div class="commentHeart">{{ feed.postedOn }}</div> -->
                 <div>
                     <i v-if="!hasDisLiked" class="bi bi-hand-thumbs-down like-hand-thumbs-down" type="radio" name="like" @click="toggleDisLike()">{{feed.numberOfDisLikes}}</i>
                 <i v-if="hasDisLiked" class="bi bi-hand-thumbs-down-fill like-hand-thumbs-down" name="like" >{{feed.numberOfDisLikes+1}}</i>
@@ -37,18 +37,29 @@
         </div>
                 <div class="desc"><b>{{ feed.userId }}</b>  {{ feed.description }}</div><br>
                 <div class="prevCmnt" v-for='oneComment in comments' :key="oneComment.id" v-bind:oneComment="oneComment">
-                    <div class="leftshift">{{oneComment.userEmail}}    :  {{oneComment.comment}}</div><br></div>
+                    <div class="leftshift mt-5 mb-5">{{oneComment.userEmail}}    :  {{oneComment.comment}}</div><br></div>
                 <div v-for='oneComment in currentComments' :key="oneComment.id" v-bind:oneComment="oneComment">
-                    <div class="leftshift">
+                    <div class="leftshift mt-3 mb-3">
                     {{oneComment.userId}}    {{oneComment}}</div>
                 </div>
             <div class="post-footer" style="margin-top:30px">
-                <div class="emojis" style="margin-left:0">&#128512;</div>
+                <!-- <div class="emojis" style="margin-left:0">&#128512;</div>
 
                 <div><textarea placeholder="Add comment..." aria-required="true" name="cmnt" v-model="currentComment"></textarea></div>
                 <div>
                     <button class=" post btn btn-outline-primary"  style="font-family: billabong, sans-serif;font-size: 30px;" @click="sendComment()">Post</button>
+                </div> -->
+                <form>
+                <div style="display: inline;"><textarea placeholder="Add comment..." name="cmnt" v-model="currentComment" required style="margin-right:100px"></textarea></div>
+                <div style="display: inline;">
+                    <button class="post"  type="button" style="    font-family: sans-serif;
+    font-size: 20px;
+    align-items: center;
+    background-color: white;
+    border: 2px solid white;
+    margin-left:-100px"  @click="sendComment()" >Submit</button>
                 </div>
+                </form>
             </div>
 		</div>
     </div>
@@ -142,6 +153,7 @@ export default {
             }
             await axios.post(`http://10.177.1.207:9000/comment/add`,body).then((res)=> {}).catch(err=>console.log(err))
             this.currentComments.push(this.currentComment)
+            this.$router.go(0)
     },
         async fetchComments(){
             console.log("called")
@@ -154,11 +166,10 @@ export default {
 </script>
 
 
-<style scoped>
-textarea{
-font-family: "billabong", sans-serif;
+<style scoped>textarea{
+font-family: sans-serif;
 color: rgb(219, 31, 94);
-font-size: 30px;
+font-size: 25px;
 width:30px;
 height:20px;
 }
@@ -169,14 +180,15 @@ font-size: 30px;
 }
 
 .leftshift{
-font-family: "billabong", sans-serif;
-color: rgb(219, 31, 94);
-font-size: 25px;
+font-family: sans-serif;
+color: black;
+font-size: 15px;
 width:300px;
 height:2px;
 margin-right: 700px;
 text-align:left;
-margin-top: 6%;
+margin-top: 10%;
+margin-bottom: 5%;
 }
 .prevCmnt{
     margin-top: -30px;
@@ -193,10 +205,12 @@ margin-top: 6%;
 textarea{
     height: 30px;
     width: 470px;
+    resize: none;
 }
 .post-footer {
     display: flex;
-    margin-top:30px;
+    margin-top:10px;
+    justify-content: space-between;
     margin-left: 0px;
 }
 .like-heart {
@@ -259,10 +273,11 @@ img {
 }
 
 .container {
-    max-width: 40.5rem;
+    max-width: 43.5rem;
     margin: 0 auto;
     padding: 0 2rem;
     margin-bottom: 20px;
+    overflow-y: hidden;
 }
 
 .btn {
@@ -348,6 +363,5 @@ img {
     height: 100%;
     object-fit: cover;
 }
-
 
 </style>

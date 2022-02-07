@@ -44,12 +44,17 @@
                 </div>
         </div>
             <div class="post-footer"  style="margin-top:30px">
-                <div class="emojis" style="margin-left:0">&#128512;</div>
-
-                <div><textarea placeholder="Add comment..." aria-required="true" name="cmnt" v-model="currentComment" required style="resize:none"></textarea></div>
-                <div>
-                    <button class=" post btn btn-outline-primary"  style="font-family: billabong, sans-serif;font-size: 30px;" @click="sendComment()">Post</button>
+                <form>
+                <div style="display: inline;"><textarea placeholder="Add comment..." name="cmnt" v-model="currentComment" required style="margin-right:100px"></textarea></div>
+                <div style="display: inline;">
+                    <button class="post"  type="button" style="font-family: sans-serif;
+    font-size: 20px;
+    align-items: center;
+    background-color: white;
+    border: 2px solid white;
+    margin-left:-100px"  @click="sendComment()" >Submit</button>
                 </div>
+                </form>
             </div>
 		</div>
 </template>
@@ -149,6 +154,7 @@ export default {
             console.log(body)
             await axios.post(`http://10.177.1.207:9000/comment/add`,body).then((res)=> {}).catch(err=>console.log(err))
             this.currentComments.push(this.currentComment)
+            this.$router.go(0)
     },
         async fetchComments(){
             console.log("called")
@@ -162,13 +168,12 @@ export default {
 </script>
 
 
-<style scoped>
-textarea{
-font-family: "billabong", sans-serif;
+<style scoped>textarea{
+font-family: sans-serif;
 color: rgb(219, 31, 94);
 font-size: 25px;
-width:470px;
-height:30px;
+width:30px;
+height:20px;
 }
 
 .post{
@@ -177,24 +182,37 @@ font-size: 30px;
 }
 
 .leftshift{
-font-family: "billabong", sans-serif;
-color: rgb(219, 31, 94);
-font-size: 25px;
+font-family: sans-serif;
+color: black;
+font-size: 15px;
 width:300px;
 height:2px;
 margin-right: 700px;
 text-align:left;
-margin-top: 6%;
+margin-top: 10%;
+margin-bottom: 5%;
 }
-
+.prevCmnt{
+    margin-top: -30px;
+    margin-bottom: 3px;
+}
 .desc{
     float: left;
     margin-top: 5px;
     margin-bottom: 5px;
 }
+.post{
+    margin-left: 20px;
+}
+textarea{
+    height: 30px;
+    width: 470px;
+    resize: none;
+}
 .post-footer {
     display: flex;
-    margin-top:30px;
+    margin-top:10px;
+    justify-content: space-between;
     margin-left: 0px;
 }
 .like-heart {
@@ -202,6 +220,12 @@ margin-top: 6%;
 }
 .bi-heart-fill {
     color: red;
+}
+.like-hand-thumbs-down {
+    cursor: pointer;
+}
+.bi-hand-thumbs-down-fill {
+    color: black;
 }
 .commentHeart{
     margin-left: 20px;
@@ -251,11 +275,11 @@ img {
 }
 
 .container {
-    margin-top: 200px;
-    max-width: 38.5rem;
+    max-width: 43.5rem;
     margin: 0 auto;
     padding: 0 2rem;
     margin-bottom: 20px;
+    overflow-y: hidden;
 }
 
 .btn {
@@ -341,6 +365,5 @@ img {
     height: 100%;
     object-fit: cover;
 }
-
 
 </style>

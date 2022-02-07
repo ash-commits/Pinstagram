@@ -6,7 +6,7 @@
 			</div>
 
 			<div class="profile-user-settings">
-            	<h1 class="profile-user-name">{{ profileUser.id }}</h1><br>
+            	<h1 class="profile-user-name">{{ this.userId }}</h1><br>
 				<button class="btn profile-edit-btn popUps" @click="showModal = true" >Edit Profile</button>
                 <transition name = "fade" appear>
                     <div class="modal-overlay" v-if="showModal"></div>
@@ -67,7 +67,7 @@ You can only change your name twice within 14 days.</p>
                      <div class="modal-body">
                          <form action="">
                              <label>Name</label><input type="text" name="orName" v-model="orName" required/><br>
-                             <label class="label mt-5 mb-2">Description</label><textarea name="textArea" v-model="textArea"/><br>
+                             <label class="label mt-5 mb-2">Description</label><textarea name="textArea" v-model="textArea" style="margin-left:20%;resize:none"/><br>
                              <!-- <label class="label">Website</label><input/><br> -->
                              <button class="btn btn-primary mt-5" type="button" @click="createOrg">Create Organisation</button>
                          </form>

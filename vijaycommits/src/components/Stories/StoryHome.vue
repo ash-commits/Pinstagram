@@ -1,10 +1,12 @@
 <template>
     <div class="container">
-                <div class="wrapper" style="margin-right:40px;">
+            <div class="status-wrapper">
+                <div class="wrapper">
+                  <div class="wrapper" style="margin-right:40px;">
 <span class="dropdown">
-<button class="popsUps" @click="showModal = true" style="margin-top: 27px;text-align: center;background-color: rgb(95, 135, 167);width: 70px;height: 70px;-o-object-fit: cover;object-fit: cover;
-border-radius: 50%;border: 2px solid #fff;background: linear-gradient(45deg, rgb(255, 230, 0), rgb(255, 0, 128) 80%)"><i class="bi bi-plus mb-5" style="font-size:50px;color:black;padding-bottom:5px" ></i></button>
-<p style="display:inline">Your Story</p>
+<button class="popsUps" @click="showModal = true" style="margin-top: 79px;text-align: center;background-color: rgb(95, 135, 167);width: 70px;height: 70px;-o-object-fit: cover;object-fit: cover;
+border-radius: 50%;border: 2px solid #fff;background: linear-gradient(45deg, rgb(255, 230, 0), rgb(255, 0, 128) 80%)"><i class="bi bi-plus mb-5" style="font-size:50px;color:black;padding-bottom:15%" ></i></button>
+<br><p style="display:inline;font-size:smaller">Your Story</p>
                   <transition name = "fade" appear>
                     <div class="modal-overlay" v-if="showModal"></div>
                   </transition>
@@ -36,9 +38,6 @@ border-radius: 50%;border: 2px solid #fff;background: linear-gradient(45deg, rgb
                   </transition>
             </span>
                 </div>
-            <div class="status-wrapper">
-
-                <div class="wrapper">
                     <StoryCard v-for='story in stories' :key="story.id" v-bind:story="story"/>
                 </div>
             </div>
@@ -138,7 +137,7 @@ export default {
 
             userId : localStorage.getItem('userId'),
             url : downloadUrl,
-            expiryTime: this.time + this.ten,
+            // expiryTime: this.time + this.ten,
             type: this.type
         }
         await axios.post('http://10.177.1.207:9000/story',body).then((res)=>{
@@ -157,7 +156,8 @@ export default {
                         })
                     }
                 })
-                console.log(this.time)   
+                console.log(this.time)  
+                this.$router.go(0) 
         }
 
 
@@ -310,6 +310,14 @@ label {
   width: 5em;
   padding: 0 1em;
   text-align: right;
+}
+.bi-plus::before {
+    content: "\f4d7";
+    margin-bottom: 25%;
+    margin-left: 5%;
+}
+.container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1450px;
 }
     
 </style>
