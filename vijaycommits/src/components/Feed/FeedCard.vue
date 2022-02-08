@@ -4,7 +4,7 @@
             <div class="top">
             <div class="proImage"><img :src="feed.url" class="insidePro" height="30px" width="30px"></div>
             <div class="card-body"><p>{{feed.userId}}</p></div>
-            <div class="setting"><i class="bi bi-three-dots"></i></div>
+            <!-- <div class="setting"><i class="bi bi-three-dots"></i></div> -->
             </div>
         <div class="gallery">
     	<div class="gallery-item" tabindex="0" v-if="feed.type===true">
@@ -410,6 +410,7 @@ img {
   font-family: "billabong", sans-serif;
   color: rgb(219, 31, 94);
   font-size: 20px;
+  height: 40px;
 }
 .options{
   font-family: "billabong", sans-serif;

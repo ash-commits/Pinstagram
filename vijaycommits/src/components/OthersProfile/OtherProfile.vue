@@ -45,7 +45,7 @@
             <div class="col"><hr></div>
     </div>
     <!-- <div v-if="1 === card.id"> -->
-        <YourPost :id="card.id"/>
+        <YourPost :id="card"/>
     <!-- </div> -->
 </div>
 </template>
@@ -76,11 +76,11 @@ import axios from 'axios'
             await axios.get(`${id}`).then((res)=> {this.profileUser=res.data}).catch(err=>console.log(err))
         },
         async getConnectionCount(){
-            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.card.id}`).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/connection/getNoOfConnection/${this.card}`).then((res)=> {this.connection=res.data}).catch(err=>console.log(err))
             console.log(this.followingCount)
         },
         async postCount(){
-            await axios.get(`http://10.177.1.207:9000/post/getNumberOfPosts/${this.card.id}`).then((res)=> {this.numberOfPost=res.data}).catch(err=>console.log(err))
+            await axios.get(`http://10.177.1.207:9000/post/getNumberOfPosts/${this.card}`).then((res)=> {this.numberOfPost=res.data}).catch(err=>console.log(err))
             console.log(this.followingCount)
         },
         async ConnectTo()
@@ -89,14 +89,14 @@ import axios from 'axios'
             const body = {
                 userEmail:localStorage.getItem("userId"),
                 connectionType:"following",
-                targetEmail:this.card.id   
+                targetEmail:this.card  
             }
             await axios.post(`http://10.177.1.207:9000/connection/add/`, body).then((res)=> {}).catch(err=>console.log(err))
 
         },
         async disconnectTo() {
             this.connection[1]-=1;
-            await axios.delete(`http://10.177.1.207:9000/connection/delete/${this.userEmail}/${this.card.id}`)
+            await axios.delete(`http://10.177.1.207:9000/connection/delete/${this.userEmail}/${this.card}`)
         },
         async sendPageView()
         {
@@ -113,7 +113,7 @@ import axios from 'axios'
     async mounted() {
         
         this.profileUser = this.id
-        await axios.get(`http://10.177.1.207:9000/connection/check/${this.userEmail}/${this.card.id}`).then((res)=>{this.currentState=res.data}).catch(err=>console.log(err))
+        await axios.get(`http://10.177.1.207:9000/connection/check/${this.userEmail}/${this.card}`).then((res)=>{this.currentState=res.data}).catch(err=>console.log(err))
         // this.fetchProfile(this.id)
         this.getConnectionCount()
         this.postCount()

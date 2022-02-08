@@ -12,7 +12,12 @@
             <div class="col"><hr></div>
     </div>
     <div>
+        <div>
         <OrganisationListCard/>
+        </div>
+        <div>
+            <ModeratorCard />
+        </div>
     </div>
 </div>
 </template>
@@ -20,12 +25,14 @@
 import Profile from '@/components/Profile/Profile.vue'
 import NavBar from '@/components/Home/NavBar.vue'
 import OrganisationListCard from '@/components/Profile/Organisation/OrganisationListCard.vue'
+import ModeratorCard from '@/components/Profile/Organisation/ModeratorCard.vue'
     export default{
        name: 'OrganisationHome',
         components: {
     NavBar,
     Profile,
-    OrganisationListCard
+    OrganisationListCard,
+    ModeratorCard
 }
     }
 </script>

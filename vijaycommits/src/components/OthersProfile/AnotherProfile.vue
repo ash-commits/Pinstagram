@@ -114,7 +114,7 @@ import axios from 'axios'
         
         this.profileUser = this.id
         await axios.get(`http://10.177.1.207:9000/connection/check/${this.userEmail}/${this.searchResult.id}`).then((res)=>{this.currentState=res.data}).catch(err=>console.log(err))
-        // this.fetchProfile(this.id)
+        console.log(this.currentState)
         this.getConnectionCount()
         this.postCount()
         console.log(this.currentState + "yes here current!!")

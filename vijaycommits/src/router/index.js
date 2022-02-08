@@ -13,6 +13,8 @@ import YourPostCard from '@/components/Profile/YourPostCard'
 import Createpost from '@/components/Home/Createpost'
 import OrganisationHome from '@/components/Profile/Organisation/OrganisationHome'
 import SearchHome from '@/components/Search/SearchHome.vue'
+import OtherProfile from '@/components/OthersProfile/OtherProfile.vue'
+import ModeratorHome from '@/components/Profile/Organisation/ModeratorHome.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -68,7 +70,7 @@ export default new Router({
     {
       path: '/other/:id',
       name: 'OtherProfile',
-      component: AnotherProfile,
+      component: OtherProfile,
       props: true,
     },
     {
@@ -91,6 +93,11 @@ export default new Router({
       name: 'SearchHome',
       component: SearchHome
     },
-    
+    {
+      path: '/ModeratorHome/:id',
+      name: ModeratorHome,
+      component: ModeratorHome,
+      props:true
+    }
   ]
 })

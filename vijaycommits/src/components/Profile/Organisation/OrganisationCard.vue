@@ -9,11 +9,15 @@
         <center>
         <div class="org">
             <div class="naming">
-            <h3>{{org.organisationName}}---->Upload from Here</h3>
+            <!-- <h3>{{org.name}}Upload from Here</h3> -->
+            <router-link :to ="{name: 'OtherProfile', params: {'card': org.id}}">
+                <h4>{{org.name}}</h4> 
+                 </router-link>
             </div>
             <div>
                 <span class="dropdown">
                   <button class="popsUps" @click="showModal = true" ><i class="bi bi-box-arrow-up"></i></button>
+                  <!-- <button class="btn btn-primary" v-on:click="goToModerators()">Moderators</button> -->
                   <transition name = "fade" appear>
                     <div class="modal-overlay" v-if="showModal"></div>
                   </transition>
@@ -67,6 +71,10 @@
         <!-- <div class="follow-btn" style="margin-right:25%"> -->
             <!-- <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">Follow</button> -->
         <!-- </div> -->
+        <div class="Notification">
+             <!-- <Moderatorcard v-for='moderator in moderators' :key="moderator" v-bind:moderator="moderator"/> -->
+             
+        </div>
     </div>
 </template>
 <script>
@@ -90,8 +98,13 @@ export default{
       type:true,
       user: {
         type: '',
-      }
+      },
+      moderators:[],
+        card:this.org.organisationId,
         }
+    },
+    mounted(){
+      
     },
     methods: {
         previewImage(event) {
@@ -101,6 +114,10 @@ export default{
     },
         handleFileUpload(event) {
       this.file = event.target.files[0];
+    },
+    goToModerators(){
+      this.$router.push(`ModeratorHome/${this.card}`)
+      //this.$router.push({ path: '/ModeratorHome', params: { 'id':this.org.organisationId } })
     },
 
     async handleSubmit() {
@@ -158,10 +175,10 @@ export default{
         // console.log(org.id)
         const bodyObj = {
 
-            'userId' : this.org.organisationId,
+            'userId' : this.org.id,
             'url' : downloadUrl,
             'description': this.description,
-            'category': "common",
+            'category': this.category,
             'postedOn': Math.round(+new Date()),
             'type': this.type
         }

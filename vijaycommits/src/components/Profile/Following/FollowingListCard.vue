@@ -1,6 +1,6 @@
 <template>
     <div>
-             <FollowingCard v-for='card in cards' :key="card.id" v-bind:card="card"/>
+             <FollowingCard v-for='card in cards' :key="card" v-bind:card="card"/>
     </div>
 </template>
 <script>

@@ -1,6 +1,7 @@
 <template>
     
     <div>
+            
              <OrganisationCard v-for='org in orgs' :key="org.id" v-bind:org="org"/>
     </div>
 </template>

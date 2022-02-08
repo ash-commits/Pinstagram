@@ -7,10 +7,10 @@
             <!-- <img :src="searchResult.url" style="display: inline;width: 30px;height: 30px;padding:5px;border-radius:40px"> -->
         </div>
         <div class="username" style="">
-            <router-link :to ="{name: 'AnotherProfile', params: {searchResult: searchResult}}"><h4 class="router">{{searchResult.name}}</h4></router-link>
+            <router-link :to ="{name: 'AnotherProfile', params: {searchResult: searchResult}}"><h4 class="router">{{searchResult.name}}&nbsp;&nbsp;&nbsp;{{ searchResult.id }}</h4></router-link>
         </div>
         <div class="follow-btn" style="margin-right:25%">
-            <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">{{searchResult.id}}</button>
+            <!-- <button class="btn btn-primary" style="height: 30px;width: 60px;font-size: small;">{{searchResult.id}}</button> -->
         </div>
     </div>
 </template>
