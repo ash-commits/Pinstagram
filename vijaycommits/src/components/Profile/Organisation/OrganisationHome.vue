@@ -16,7 +16,7 @@
         <OrganisationListCard/>
         </div>
         <div>
-            <ModeratorCard />
+            <!-- <ModeratorCard /> -->
         </div>
     </div>
 </div>
